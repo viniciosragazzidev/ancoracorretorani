@@ -118,7 +118,7 @@ const NavbarLp: React.FC = () => {
                                             <NavigationMenuContent>
                                                 <ul className="grid gap-1 p-2 w-[220px] bg-popover rounded-xl shadow-lg border border-border/50">
                                                     {group.items.map((item) => (
-                                                        <li key={item.href}>
+                                                        <li key={item.title}>
                                                             <NavigationMenuLink
                                                                 href={item.href}
                                                                 className="block rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-all duration-200"
