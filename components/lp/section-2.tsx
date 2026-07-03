@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import SplitText from '@/components/split-text';
 
 interface ProductCard {
@@ -202,70 +202,76 @@ const SectionTwo: React.FC = () => {
 
             <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-start">
                 
-                {/* 1. Tag Superior */}
+                {/* 1. CABEÇALHO DA SEÇÃO */}
                 <motion.div
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-background border border-border/60 text-[11px] sm:text-xs font-semibold text-muted-foreground mb-6 shadow-xs"
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.6, ease: 'easeOut' }}
+                    className="w-full max-w-2xl flex flex-col items-start text-left mb-10 select-none"
                 >
-                    <span className="relative flex size-2 shrink-0">
-                        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-primary opacity-75"></span>
-                        <span className="relative inline-flex size-2 rounded-full bg-primary"></span>
-                    </span>
-                    <span className="tracking-wide">Nossos Produtos</span>
+                    <div className="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold uppercase tracking-wider text-muted-foreground mb-4">
+                        <span className="size-1.5 rounded-full bg-primary shrink-0" />
+                        <span>Nossos Produtos</span>
+                    </div>
+                    <h2 className="text-2xl sm:text-4xl font-medium tracking-tight text-foreground leading-tight mb-2">
+                        As Melhores Opções de Saúde e Odonto em Um Só Lugar.
+                    </h2>
+                    <p className="text-muted-foreground text-sm sm:text-base font-light">
+                        Cotação instantânea com tabela oficial de coparticipação e carências.
+                    </p>
                 </motion.div>
 
-                {/* 2. Headline Principal */}
-                <div className="max-w-3xl mb-8">
-                    <SplitText
-                        text="As Melhores Opções de Saúde e Odonto em Um Só Lugar."
-                        tag="h2"
-                        className="text-3xl sm:text-4xl lg:text-[44px] font-bold tracking-tight text-foreground leading-[1.12]"
-                        delay={12}
-                        duration={0.8}
-                        ease="power3.out"
-                        splitType="words"
-                        from={{ opacity: 0, y: 25 }}
-                        to={{ opacity: 1, y: 0 }}
-                        threshold={0.1}
-                        textAlign="left"
-                    />
+                {/* 2. MENU DE ABAS / TABS */}
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12 border-b border-border/10 pb-6">
+                    {/* Tabs */}
+                    <div className="flex flex-wrap gap-2">
+                        <button
+                            onClick={() => setActiveTab('saude')}
+                            className="relative px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-none cursor-pointer"
+                        >
+                            {activeTab === 'saude' && (
+                                <motion.div
+                                    layoutId="activeTabSection2"
+                                    className="absolute inset-0 bg-foreground rounded-full"
+                                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                            <span className={`relative z-10 ${activeTab === 'saude' ? 'text-background' : 'text-muted-foreground hover:text-foreground'}`}>
+                                Planos de Saúde
+                            </span>
+                        </button>
+
+                        <button
+                            onClick={() => setActiveTab('odonto')}
+                            className="relative px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-colors duration-300 focus-visible:outline-none cursor-pointer"
+                        >
+                            {activeTab === 'odonto' && (
+                                <motion.div
+                                    layoutId="activeTabSection2"
+                                    className="absolute inset-0 bg-foreground rounded-full"
+                                    transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                                />
+                            )}
+                            <span className={`relative z-10 ${activeTab === 'odonto' ? 'text-background' : 'text-muted-foreground hover:text-foreground'}`}>
+                                Planos Odontológicos
+                            </span>
+                        </button>
+                    </div>
+
+                    {/* Progress Slider */}
+                    <div className="flex items-center gap-3 select-none text-xs text-muted-foreground font-semibold shrink-0">
+                        <div className="w-16 h-1 bg-muted rounded-full overflow-hidden">
+                            <motion.div
+                                className="h-full bg-primary"
+                                initial={{ width: '50%' }}
+                                animate={{ width: activeTab === 'saude' ? '50%' : '100%' }}
+                                transition={{ duration: 0.3 }}
+                            />
+                        </div>
+                        <span>{activeTab === 'saude' ? '1' : '2'}/2</span>
+                    </div>
                 </div>
-
-                {/* 3. Seletor de Abas (Pill Tabs) */}
-                <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                    className="inline-flex items-center p-1.5 rounded-full bg-muted/60 dark:bg-muted/40 border border-border/50 shadow-inner mb-10 select-none"
-                >
-                    <button
-                        onClick={() => setActiveTab('saude')}
-                        className={`relative px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
-                            activeTab === 'saude'
-                                ? 'bg-foreground text-background shadow-md'
-                                : 'text-muted-foreground hover:text-foreground'
-                        }`}
-                    >
-                        <span>🩺</span>
-                        <span>Planos de Saúde</span>
-                    </button>
-
-                    <button
-                        onClick={() => setActiveTab('odonto')}
-                        className={`relative px-5 py-2.5 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 flex items-center gap-2 cursor-pointer ${
-                            activeTab === 'odonto'
-                                ? 'bg-foreground text-background shadow-md'
-                                : 'text-muted-foreground hover:text-foreground'
-                        }`}
-                    >
-                        <span>🦷</span>
-                        <span>Planos Odontológicos</span>
-                    </button>
-                </motion.div>
 
                 {/* 4. Vitrine de Produtos (Grid) */}
                 <div className="w-full">
@@ -325,18 +331,6 @@ const SectionTwo: React.FC = () => {
                         </motion.div>
                     </AnimatePresence>
                 </div>
-
-                {/* Micro-nota de transparência e consulta */}
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                    className="w-full mt-10 text-center flex items-center justify-center gap-2 text-xs text-muted-foreground"
-                >
-                    <Sparkles className="size-3.5 text-primary shrink-0" />
-                    <span>Cotação instantânea com tabela oficial de coparticipação e carências.</span>
-                </motion.div>
 
             </div>
         </section>
