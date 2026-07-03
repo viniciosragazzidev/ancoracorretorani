@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin } from 'lucide-react';
 
@@ -43,9 +44,16 @@ const Footer: React.FC = () => {
                         variants={footerColumnVariants}
                         className="md:col-span-4 flex flex-col space-y-4 text-left"
                     >
-                        <h3 className="text-white text-xl font-bold tracking-tight">
-                            Âncora Corretora
-                        </h3>
+                        <Link href="/" className="inline-block">
+                            <Image 
+                                src="/logo.webp" 
+                                alt="Âncora Corretora" 
+                                width={140} 
+                                height={40} 
+                                className="h-8 w-auto object-contain brightness-0 invert" 
+                                priority
+                            />
+                        </Link>
                         <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed max-w-sm">
                             Especialistas em encontrar a cobertura de saúde perfeita na Baixada Fluminense. Cuidado, economia e transparência da contratação ao pós-venda.
                         </p>

@@ -297,6 +297,7 @@ const SectionTwo: React.FC = () => {
                                             width={140}
                                             height={48}
                                             className="h-10 sm:h-11 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                                            priority
                                         />
                                     </div>
 
