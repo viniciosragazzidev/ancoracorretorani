@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldCheck, UserPlus, Trash2, ArrowLeft, Loader2, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, UserPlus, Trash2, ArrowLeft, Loader2, CheckCircle2, Building2, Users } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
@@ -37,8 +37,15 @@ const SectionFive: React.FC<Props> = () => {
     // Form Data
     const [categoria, setCategoria] = useState<'saude' | 'odonto' | 'ambos' | null>(null);
     const [contratacao, setContratacao] = useState<'individual' | 'corporate' | null>(null);
+    
+    // Individual Form State
     const [idadeTitular, setIdadeTitular] = useState('');
     const [dependants, setDependants] = useState<Dependant[]>([]);
+    
+    // Corporate Form State (Media de idade e Quantidade de colaboradores)
+    const [qtdColaboradores, setQtdColaboradores] = useState('');
+    const [mediaIdade, setMediaIdade] = useState('');
+
     const [nome, setNome] = useState('');
     const [whatsapp, setWhatsapp] = useState('');
     
@@ -113,11 +120,18 @@ const SectionFive: React.FC<Props> = () => {
         if (!nome || whatsapp.length < 14) return;
 
         setIsSubmitting(true);
-        // Simulate data post
+        // Simulate data post & WhatsApp format
         setTimeout(() => {
             setIsSubmitting(false);
             setIsSuccess(true);
-        }, 2000);
+            
+            const detailText = contratacao === 'corporate'
+                ? `Empresa (CNPJ/MEI) - ${qtdColaboradores} colaboradores, média de idade: ${mediaIdade} anos`
+                : `Individual/Família - Titular: ${idadeTitular} anos${dependants.length > 0 ? `, Dependentes: ${dependants.map(d => d.age).join(', ')} anos` : ''}`;
+
+            const msg = `Olá! Me chamo ${nome}. Gostaria de receber a cotação do plano ${categoria?.toUpperCase()}.\nPerfil: ${detailText}`;
+            window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
+        }, 1500);
     };
 
     return (
@@ -131,7 +145,7 @@ const SectionFive: React.FC<Props> = () => {
             <div className="w-full max-w-[1200px] mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-center gap-12 md:gap-16 w-full">
                     
-                    {/* COLUNA 1: TEXTOS E BENEFÍCIOS (Esquerda no desktop, Topo no mobile) */}
+                    {/* COLUNA 1: TEXTOS E BENEFÍCIOS */}
                     <motion.div 
                         initial={{ opacity: 0, x: -30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -157,7 +171,6 @@ const SectionFive: React.FC<Props> = () => {
                             Simule preços e carências em poucos cliques. Nosso sistema analisa as melhores operadoras para o seu perfil.
                         </p>
                         
-                        {/* Visual checklist matching standard visual rhythm */}
                         <div className="space-y-5 pt-2 w-full">
                             <div className="flex items-start gap-3">
                                 <span className="size-1.5 rounded-full bg-primary shrink-0 mt-2" />
@@ -178,14 +191,14 @@ const SectionFive: React.FC<Props> = () => {
                                         Cálculo Exato
                                     </h4>
                                     <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed font-light">
-                                        Adicione familiares e veja o valor consolidado de todas as faixas etárias na hora.
+                                        Adicione familiares ou a média de idade da sua equipe para valores consolidados.
                                     </p>
                                 </div>
                             </div>
                         </div>
                     </motion.div>
 
-                    {/* COLUNA 2: CARD DO SIMULADOR (Direita no desktop, Baixo no mobile) */}
+                    {/* COLUNA 2: CARD DO SIMULADOR */}
                     <motion.div 
                         initial={{ opacity: 0, x: 30 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -213,7 +226,7 @@ const SectionFive: React.FC<Props> = () => {
                                             Simulação Gerada com Sucesso!
                                         </h3>
                                         <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed max-w-sm font-light mb-6">
-                                            Olá, <span className="font-bold text-foreground">{nome}</span>! Nós já começamos a processar as tabelas das melhores operadoras para o seu perfil. Um consultor especialista entrará em contato no WhatsApp <span className="font-semibold text-foreground">{whatsapp}</span> em instantes.
+                                            Olá, <span className="font-bold text-foreground">{nome}</span>! Nós já preparamos a tabela comparativa das melhores operadoras. Nosso consultor enviará tudo no WhatsApp <span className="font-semibold text-foreground">{whatsapp}</span>.
                                         </p>
                                         <Button
                                             variant="outline"
@@ -223,6 +236,8 @@ const SectionFive: React.FC<Props> = () => {
                                                 setContratacao(null);
                                                 setIdadeTitular('');
                                                 setDependants([]);
+                                                setQtdColaboradores('');
+                                                setMediaIdade('');
                                                 setNome('');
                                                 setWhatsapp('');
                                                 setIsSuccess(false);
@@ -259,7 +274,7 @@ const SectionFive: React.FC<Props> = () => {
                                             <span>Passo {step} de 4</span>
                                         </div>
 
-                                        {/* Step Form Render */}
+                                        {/* Step 1: Categoria */}
                                         {step === 1 && (
                                             <div className="space-y-6">
                                                 <h3 className="text-base sm:text-lg font-semibold text-foreground tracking-tight text-left">
@@ -294,6 +309,7 @@ const SectionFive: React.FC<Props> = () => {
                                             </div>
                                         )}
 
+                                        {/* Step 2: Perfil de Contratação */}
                                         {step === 2 && (
                                             <div className="space-y-6">
                                                 <h3 className="text-base sm:text-lg font-semibold text-foreground tracking-tight text-left">
@@ -314,7 +330,7 @@ const SectionFive: React.FC<Props> = () => {
                                                             </h4>
                                                         </div>
                                                         <p className="text-[11px] sm:text-xs text-muted-foreground leading-normal font-light mt-4">
-                                                            Contratação rápida via CPF
+                                                            Contratação via CPF
                                                         </p>
                                                     </motion.button>
 
@@ -342,81 +358,115 @@ const SectionFive: React.FC<Props> = () => {
                                             </div>
                                         )}
 
+                                        {/* Step 3: Dados dos Integrantes / Empresa */}
                                         {step === 3 && (
                                             <div className="space-y-6 text-left">
                                                 <h3 className="text-base sm:text-lg font-semibold text-foreground tracking-tight">
-                                                    Quem será incluído no plano?
+                                                    {contratacao === 'corporate' ? 'Perfil da Empresa e Colaboradores' : 'Quem será incluído no plano?'}
                                                 </h3>
                                                 
-                                                <div className="space-y-4">
-                                                    {/* Titular Age Input */}
-                                                    <div className="space-y-1.5">
-                                                        <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                                                            Sua idade
-                                                        </label>
-                                                        <input 
-                                                            type="text" 
-                                                            pattern="[0-9]*"
-                                                            value={idadeTitular}
-                                                            onChange={handleAgeChange}
-                                                            placeholder="Digite sua idade (ex: 34)"
-                                                            className="w-full px-4 py-3 rounded-xl border border-border/70 focus:border-primary bg-muted/20 text-sm focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all duration-200"
-                                                        />
-                                                    </div>
-
-                                                    {/* Dependants Rows */}
-                                                    {dependants.length > 0 && (
-                                                        <div className="space-y-3 pt-2">
-                                                            <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider block">
-                                                                Dependentes
-                                                            </span>
-                                                            <AnimatePresence>
-                                                                {dependants.map((dep, index) => (
-                                                                    <motion.div
-                                                                        key={dep.id}
-                                                                        initial={{ scale: 0.85, opacity: 0 }}
-                                                                        animate={{ scale: 1, opacity: 1 }}
-                                                                        exit={{ scale: 0.85, opacity: 0 }}
-                                                                        className="flex items-center gap-3"
-                                                                    >
-                                                                        <input 
-                                                                            type="text" 
-                                                                            pattern="[0-9]*"
-                                                                            value={dep.age}
-                                                                            onChange={(e) => handleDepAgeChange(dep.id, e.target.value)}
-                                                                            placeholder={`Idade do dependente ${index + 1}`}
-                                                                            className="flex-1 px-4 py-2.5 rounded-xl border border-border/70 focus:border-primary bg-muted/20 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all duration-200"
-                                                                        />
-                                                                        <Button
-                                                                            type="button"
-                                                                            variant="destructive"
-                                                                            size="icon"
-                                                                            onClick={() => removeDependant(dep.id)}
-                                                                            className="rounded-xl h-10 w-10 shrink-0"
-                                                                        >
-                                                                            <Trash2 className="size-4" />
-                                                                        </Button>
-                                                                    </motion.div>
-                                                                ))}
-                                                            </AnimatePresence>
+                                                {contratacao === 'corporate' ? (
+                                                    /* EMPRESA / MEI: Quantidade de colaboradores e média de idade */
+                                                    <div className="space-y-4">
+                                                        <div className="space-y-1.5">
+                                                            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                                                                <Users className="size-3.5 text-primary" />
+                                                                <span>Quantidade de colaboradores / vidas</span>
+                                                            </label>
+                                                            <input 
+                                                                type="text" 
+                                                                pattern="[0-9]*"
+                                                                value={qtdColaboradores}
+                                                                onChange={(e) => setQtdColaboradores(e.target.value.replace(/\D/g, ''))}
+                                                                placeholder="Digite o total de pessoas (ex: 5)"
+                                                                className="w-full px-4 py-3 rounded-xl border border-border/70 focus:border-primary bg-muted/20 text-sm focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all duration-200"
+                                                            />
                                                         </div>
-                                                    )}
 
-                                                    {/* Add Dependant Button */}
-                                                    <Button
-                                                        type="button"
-                                                        variant="outline"
-                                                        onClick={addDependant}
-                                                        className="w-fit rounded-full px-4 h-9 font-medium text-xs flex items-center gap-1.5"
-                                                    >
-                                                        <UserPlus className="size-3.5" />
-                                                        <span>Adicionar dependente</span>
-                                                    </Button>
-                                                </div>
+                                                        <div className="space-y-1.5">
+                                                            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                                                                <Building2 className="size-3.5 text-primary" />
+                                                                <span>Média de idade da equipe</span>
+                                                            </label>
+                                                            <input 
+                                                                type="text" 
+                                                                pattern="[0-9]*"
+                                                                value={mediaIdade}
+                                                                onChange={(e) => setMediaIdade(e.target.value.replace(/\D/g, ''))}
+                                                                placeholder="Digite a média estimada de idade (ex: 32)"
+                                                                className="w-full px-4 py-3 rounded-xl border border-border/70 focus:border-primary bg-muted/20 text-sm focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all duration-200"
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                ) : (
+                                                    /* INDIVIDUAL / FAMÍLIA: Idade titular + dependentes individuais */
+                                                    <div className="space-y-4">
+                                                        <div className="space-y-1.5">
+                                                            <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
+                                                                Sua idade
+                                                            </label>
+                                                            <input 
+                                                                type="text" 
+                                                                pattern="[0-9]*"
+                                                                value={idadeTitular}
+                                                                onChange={handleAgeChange}
+                                                                placeholder="Digite sua idade (ex: 34)"
+                                                                className="w-full px-4 py-3 rounded-xl border border-border/70 focus:border-primary bg-muted/20 text-sm focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all duration-200"
+                                                            />
+                                                        </div>
+
+                                                        {dependants.length > 0 && (
+                                                            <div className="space-y-3 pt-2">
+                                                                <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider block">
+                                                                    Dependentes
+                                                                </span>
+                                                                <AnimatePresence>
+                                                                    {dependants.map((dep, index) => (
+                                                                        <motion.div
+                                                                            key={dep.id}
+                                                                            initial={{ scale: 0.85, opacity: 0 }}
+                                                                            animate={{ scale: 1, opacity: 1 }}
+                                                                            exit={{ scale: 0.85, opacity: 0 }}
+                                                                            className="flex items-center gap-3"
+                                                                        >
+                                                                            <input 
+                                                                                type="text" 
+                                                                                pattern="[0-9]*"
+                                                                                value={dep.age}
+                                                                                onChange={(e) => handleDepAgeChange(dep.id, e.target.value)}
+                                                                                placeholder={`Idade do dependente ${index + 1}`}
+                                                                                className="flex-1 px-4 py-2.5 rounded-xl border border-border/70 focus:border-primary bg-muted/20 text-xs sm:text-sm focus:outline-none focus:ring-1 focus:ring-primary/20 transition-all duration-200"
+                                                                            />
+                                                                            <Button
+                                                                                type="button"
+                                                                                variant="destructive"
+                                                                                size="icon"
+                                                                                onClick={() => removeDependant(dep.id)}
+                                                                                className="rounded-xl h-10 w-10 shrink-0"
+                                                                            >
+                                                                                <Trash2 className="size-4" />
+                                                                            </Button>
+                                                                        </motion.div>
+                                                                    ))}
+                                                                </AnimatePresence>
+                                                            </div>
+                                                        )}
+
+                                                        <Button
+                                                            type="button"
+                                                            variant="outline"
+                                                            onClick={addDependant}
+                                                            className="w-fit rounded-full px-4 h-9 font-medium text-xs flex items-center gap-1.5"
+                                                        >
+                                                            <UserPlus className="size-3.5" />
+                                                            <span>Adicionar dependente</span>
+                                                        </Button>
+                                                    </div>
+                                                )}
 
                                                 {/* Next button */}
                                                 <Button
-                                                    disabled={!idadeTitular}
+                                                    disabled={contratacao === 'corporate' ? (!qtdColaboradores || !mediaIdade) : !idadeTitular}
                                                     onClick={nextStep}
                                                     className="w-full h-11 rounded-full font-medium text-sm mt-6 shadow-sm cursor-pointer"
                                                 >
@@ -425,6 +475,7 @@ const SectionFive: React.FC<Props> = () => {
                                             </div>
                                         )}
 
+                                        {/* Step 4: Contato & Envio */}
                                         {step === 4 && (
                                             <form onSubmit={handleSubmit} className="space-y-6 text-left">
                                                 <h3 className="text-base sm:text-lg font-semibold text-foreground tracking-tight">
@@ -432,7 +483,6 @@ const SectionFive: React.FC<Props> = () => {
                                                 </h3>
                                                 
                                                 <div className="space-y-4">
-                                                    {/* Name Input */}
                                                     <div className="space-y-1.5">
                                                         <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                                                             Seu Nome
@@ -447,7 +497,6 @@ const SectionFive: React.FC<Props> = () => {
                                                         />
                                                     </div>
 
-                                                    {/* Phone Input with Mask */}
                                                     <div className="space-y-1.5">
                                                         <label className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                                                             WhatsApp com DDD
@@ -463,7 +512,6 @@ const SectionFive: React.FC<Props> = () => {
                                                     </div>
                                                 </div>
 
-                                                {/* Action Button */}
                                                 <Button
                                                     type="submit"
                                                     disabled={isSubmitting || !nome || whatsapp.length < 14}
@@ -479,7 +527,6 @@ const SectionFive: React.FC<Props> = () => {
                                                     )}
                                                 </Button>
 
-                                                {/* Friction Reducer */}
                                                 <div className="flex items-center justify-center gap-1.5 text-[10px] text-muted-foreground/80 font-medium select-none mt-2">
                                                     <ShieldCheck className="size-3.5 text-primary shrink-0" />
                                                     <span>Seus dados estão protegidos pela LGPD. Não enviamos spam.</span>
