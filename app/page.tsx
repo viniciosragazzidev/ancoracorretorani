@@ -8,6 +8,7 @@ import SectionFive from "@/components/lp/section-5";
 import SectionSix from "@/components/lp/section-6";
 import SectionSeven from "@/components/lp/section-7";
 import Footer from "@/components/lp/footer";
+import FloatingChat from "@/components/lp/floating-chat";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
       <SectionSix />
       <SectionSeven />
       <Footer />
+      <FloatingChat />
     </main>
   );
 }
