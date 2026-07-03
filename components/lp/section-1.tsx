@@ -176,7 +176,7 @@ const SectionOne: React.FC = () => {
         </section>
 
         {/* Logo Loop - Partners */}
-        <div className="w-full bg-background py-8 md:py-12 font-sans">
+        <div className="w-full bg-background py-8 md:py-12 font-sans flex items-center justify-center">
             <div className="w-full max-w-5xl mx-auto px-6 opacity-70">
                 <p className="text-xs text-muted-foreground/60 mb-6 uppercase tracking-widest font-semibold text-center">Trabalhamos com as melhores do mercado</p>
                 <LogoLoop
@@ -184,7 +184,8 @@ const SectionOne: React.FC = () => {
                     speed={40}
                     gap={64}
                     logoHeight={40}
-                    fadeOut={false}
+                    fadeOut={true}
+                    fadeOutColor="#ffffff"
                     pauseOnHover={true}
                 />
             </div>
