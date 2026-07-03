@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Building2, User, Phone, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { Building2, User, Phone, ShieldCheck, Stethoscope, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
@@ -34,7 +34,7 @@ const priceCardVariants = {
 const Hero: React.FC = () => {
     const [nome, setNome] = useState('');
     const [whatsapp, setWhatsapp] = useState('');
-    const [tipo, setTipo] = useState('cpf');
+    const [tipo, setTipo] = useState('cnpj');
     const [isFocused, setIsFocused] = useState(false);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -60,7 +60,7 @@ const Hero: React.FC = () => {
             setIsSubmitting(true);
             setTimeout(() => {
                 setIsSubmitting(false);
-                window.open(`https://wa.me/55${cleaned}?text=${encodeURIComponent(`Olá! Me chamo ${nome} e gostaria de uma cotação rápida via ${tipo.toUpperCase()}.`)}`, '_blank');
+                window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(`Olá! Me chamo ${nome} e gostaria de uma cotação rápida via ${tipo.toUpperCase()}.`)}`, '_blank');
             }, 600);
         }
     };
@@ -70,7 +70,7 @@ const Hero: React.FC = () => {
 
             {/* Background Image with Cinematic Blend */}
             <div
-                className="absolute inset-0 -z-20 bg-[url('/bg_hero.jpg')] bg-cover bg-center bg-no-repeat opacity-20 dark:opacity-10 mix-blend-luminosity grayscale contrast-125"
+                className="absolute inset-0 -z-20 bg-[url('/bg_hero.jpg')] bg-cover bg-center bg-no-repeat opacity-20 dark:opacity-10 mix-blend-luminosity grayscale contrast-125 pointer-events-none"
             />
 
             {/* Ambient Background Glows */}
@@ -98,7 +98,7 @@ const Hero: React.FC = () => {
                         <span>Tabelas de Saúde e Odonto Atualizadas 2026</span>
                     </motion.div>
 
-                    {/* Headline Principal using SplitText for cinematic entrance */}
+                    {/* Headline Principal using SplitText */}
                     <SplitText
                         tag="h1"
                         textAlign="left"
@@ -122,7 +122,7 @@ const Hero: React.FC = () => {
                         custom={0.3}
                         className="text-muted-foreground text-base sm:text-lg lg:text-xl max-w-2xl leading-relaxed font-light mb-10"
                     >
-                        Economize até <span className="font-semibold text-foreground">40%</span> comparando Amil, Bradesco, SulAmérica, Unimed e mais. Encontre a cobertura ideal para você, sua família ou empresa em minutos.
+                        Economize até <span className="font-semibold text-foreground">35%</span> comparando Amil, Bradesco, SulAmérica, Unimed e mais. Cobertura ideal para você, sua família ou empresa.
                     </motion.p>
 
                     {/* Blocos de Preço / Badges (Staggered) */}
@@ -139,10 +139,10 @@ const Hero: React.FC = () => {
                             variants={priceCardVariants}
                             whileHover={{ y: -4, scale: 1.02 }}
                             transition={{ type: "spring", stiffness: 300 }}
-                            className="bg-background/80 backdrop-blur-md border border-border/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-4 w-full sm:w-auto min-w-[250px]"
+                            className="bg-background/80 backdrop-blur-md border border-border/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-4 w-full sm:w-auto min-w-[240px]"
                         >
-                            <div className="size-12 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0">
-                                <span className="text-xl">🩺</span>
+                            <div className="size-11 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 border border-blue-500/20">
+                                <Stethoscope className="size-5" />
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Saúde Individual/PME</span>
@@ -155,14 +155,14 @@ const Hero: React.FC = () => {
                             variants={priceCardVariants}
                             whileHover={{ y: -4, scale: 1.02 }}
                             transition={{ type: "spring", stiffness: 300 }}
-                            className="bg-background/80 backdrop-blur-md border border-border/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-4 w-full sm:w-auto min-w-[250px]"
+                            className="bg-background/80 backdrop-blur-md border border-border/80 rounded-2xl p-4 shadow-sm hover:shadow-md transition-shadow flex items-center gap-4 w-full sm:w-auto min-w-[240px]"
                         >
-                            <div className="size-12 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                                <span className="text-xl">🦷</span>
+                            <div className="size-11 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 border border-emerald-500/20">
+                                <Sparkles className="size-5" />
                             </div>
                             <div className="flex flex-col">
                                 <span className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider">Odonto Completo</span>
-                                <span className="text-sm font-semibold text-foreground">a partir de <span className="text-primary font-bold text-lg">R$ 15,00</span></span>
+                                <span className="text-sm font-semibold text-foreground">a partir de <span className="text-primary font-bold text-lg">R$ 21,90</span></span>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -175,9 +175,9 @@ const Hero: React.FC = () => {
                     variants={formReveal}
                     className="w-full flex justify-center lg:justify-end mt-12 lg:mt-0"
                 >
-                    <div className="w-full max-w-[420px] bg-background/70 dark:bg-background/60 backdrop-blur-2xl border border-border/40 rounded-3xl p-6 sm:p-8 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.15)] dark:shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)] relative overflow-hidden group">
+                    <div className="w-full max-w-[420px] bg-background/80 dark:bg-background/70 backdrop-blur-2xl border border-border/40 rounded-3xl p-6 sm:p-8 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.15)] relative overflow-hidden group">
 
-                        {/* Subtle internal glow for premium feel */}
+                        {/* Subtle internal glow */}
                         <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-500/60 via-emerald-500/60 to-blue-500/60 bg-[length:200%_auto] animate-gradient" />
 
                         <div className="mb-8">
@@ -243,7 +243,6 @@ const Hero: React.FC = () => {
                                         <option value="cnpj">Sim, quero +35% de desconto</option>
                                         <option value="cpf">Não, quero plano pessoa física (CPF)</option>
                                     </select>
-                                    {/* Custom Dropdown Chevron */}
                                     <div className="absolute inset-y-0 right-3 flex items-center pointer-events-none text-muted-foreground">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6" /></svg>
                                     </div>
@@ -255,7 +254,7 @@ const Hero: React.FC = () => {
                                 <Button
                                     type="submit"
                                     disabled={!nome || whatsapp.length < 14 || isSubmitting}
-                                    className="w-full h-14 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all active:scale-[0.98]"
+                                    className="w-full h-14 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-base shadow-xl hover:shadow-2xl hover:shadow-primary/20 transition-all active:scale-[0.98] cursor-pointer"
                                 >
                                     {isSubmitting ? 'Processando...' : 'Falar com Consultor Agora'}
                                 </Button>
