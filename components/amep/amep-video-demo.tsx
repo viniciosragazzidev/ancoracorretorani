@@ -17,7 +17,7 @@ export default function AmepVideoDemo() {
                 <div className="flex flex-col items-center text-center space-y-3 mb-10">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-wide">
                         <Hospital className="size-3.5" />
-                        <span>Conheça Nossas Instalações</span>
+                        <span>Conheça as Instalações do Plano Amep</span>
                     </div>
 
                     <SplitText
@@ -32,11 +32,11 @@ export default function AmepVideoDemo() {
                         to={{ opacity: 1, y: 0 }}
                         threshold={0.1}
                     >
-                        Hospital Prontonil & Atendimento Amep em Nova Iguaçu
+                        Hospital Prontonil & Atendimento Amep Saúde em Nova Iguaçu
                     </SplitText>
 
                     <p className="text-muted-foreground text-base sm:text-lg max-w-xl font-light leading-relaxed">
-                        Veja na prática como funciona a estrutura de atendimento médico de urgência e consultas.
+                        Veja na prática a estrutura de atendimento médico de urgência e consultas do plano Amep Saúde.
                     </p>
                 </div>
 

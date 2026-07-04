@@ -94,11 +94,11 @@ export default function AmepSimulator() {
                         to={{ opacity: 1, y: 0 }}
                         threshold={0.1}
                     >
-                        Pronto para pagar menos e ter segurança de atendimento?
+                        Simule seu Plano Amep Saúde Agora
                     </SplitText>
 
                     <p className="text-muted-foreground text-base sm:text-lg max-w-xl font-light leading-relaxed">
-                        Simule em 3 cliques o valor consolidado para você, sua família ou sua empresa na Amep Saúde.
+                        Simule em 3 cliques o valor consolidado para você, sua família ou sua empresa no plano Amep Saúde.
                     </p>
                 </div>
 

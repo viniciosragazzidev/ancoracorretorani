@@ -48,7 +48,7 @@ export default function AmepPricing() {
                         to={{ opacity: 1, y: 0 }}
                         threshold={0.1}
                     >
-                        Quanto custa o plano?
+                        Tabela de Preços do Plano Amep Saúde
                     </SplitText>
 
                     <p className="text-muted-foreground text-base sm:text-lg max-w-xl font-light leading-relaxed">

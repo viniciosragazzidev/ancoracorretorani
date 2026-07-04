@@ -63,7 +63,7 @@ export default function AmepCta() {
                         to={{ opacity: 1, y: 0 }}
                         threshold={0.1}
                     >
-                        Fale com a Âncora Corretora e garanta as condições de Junho.
+                        Fale com a Âncora Corretora e garanta as condições do Plano Amep Saúde de Junho.
                     </SplitText>
 
                     {/* Subheadline */}

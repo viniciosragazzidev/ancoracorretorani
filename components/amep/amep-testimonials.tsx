@@ -43,7 +43,7 @@ export default function AmepTestimonials() {
                 <div className="flex flex-col items-center text-center space-y-3 mb-12">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-wide">
                         <Quote className="size-3.5" />
-                        <span>Prova Social & Depoimentos Reais</span>
+                        <span>Depoimentos do Plano Amep Saúde</span>
                     </div>
 
                     <SplitText
@@ -58,11 +58,11 @@ export default function AmepTestimonials() {
                         to={{ opacity: 1, y: 0 }}
                         threshold={0.1}
                     >
-                        O que Nossos Clientes Dizem Sobre o Amep Saúde
+                        O que Nossos Clientes Dizem Sobre o Plano Amep Saúde
                     </SplitText>
 
                     <p className="text-muted-foreground text-base sm:text-lg max-w-xl font-light leading-relaxed">
-                        Famílias e empresas na Baixada Fluminense que já garantiram a tranquilidade de atendimento.
+                        Famílias e empresas na Baixada Fluminense que já garantiram o plano Amep Saúde.
                     </p>
                 </div>
 

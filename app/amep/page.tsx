@@ -11,11 +11,11 @@ import AmepFooter from "@/components/amep/amep-footer";
 import FloatingChat from "@/components/lp/floating-chat";
 
 export const metadata: Metadata = {
-    title: "Amep Saúde - Tabela de Preços e Cotação Online | Âncora Corretora",
+    title: "Plano Amep Saúde - Tabela de Preços e Cotação Online | Âncora Corretora",
     description: "Consulte a tabela oficial do plano Amep Saúde. Planos a partir de R$ 82,94 (CNPJ/MEI) e R$ 138,74 (Individual). Atendimento garantido no Hospital Prontonil em Nova Iguaçu.",
     openGraph: {
-        title: "Amep Saúde - Tabela Promocional Atualizada",
-        description: "Planos de saúde acessíveis na Baixada Fluminense com carência zero para consultas na rede própria.",
+        title: "Plano Amep Saúde - Tabela Promocional Atualizada",
+        description: "Planos de saúde acessíveis na Baixada Fluminense com carência zero para consultas na rede própria Amep.",
         url: "https://ancoracorretora.com.br/amep",
         siteName: "Âncora Corretora",
         images: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
                 url: "/amep_saude_logo.png",
                 width: 1200,
                 height: 630,
-                alt: "Amep Saúde - Tabela Promocional Âncora Corretora"
+                alt: "Plano Amep Saúde - Tabela Promocional Âncora Corretora"
             }
         ],
         locale: "pt_BR",

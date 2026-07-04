@@ -72,7 +72,7 @@ export default function AmepTabs() {
                 <div className="flex flex-col items-center text-center space-y-3 mb-10">
                     <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-wide">
                         <Zap className="size-3.5" />
-                        <span>Por que escolher a Amep Saúde?</span>
+                        <span>Por que escolher o Plano Amep Saúde?</span>
                     </div>
 
                     <SplitText
@@ -87,11 +87,11 @@ export default function AmepTabs() {
                         to={{ opacity: 1, y: 0 }}
                         threshold={0.1}
                     >
-                        Diferenciais Práticos para Facilitar a Sua Vida
+                        Diferenciais Práticos do Plano Amep Saúde
                     </SplitText>
 
                     <p className="text-muted-foreground text-base sm:text-lg max-w-xl font-light leading-relaxed">
-                        Clique nas abas abaixo para explorar os benefícios, rede de hospitais e regras simples.
+                        Clique nas abas abaixo para explorar os benefícios, rede de hospitais e regras do plano Amep.
                     </p>
                 </div>
 
