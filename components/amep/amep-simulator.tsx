@@ -136,7 +136,7 @@ export default function AmepSimulator() {
                             >
                                 <div>
                                     <h3 className="text-xl font-bold text-foreground">Passo 1: Qual é o seu tipo de contratação?</h3>
-                                    <p className="text-xs text-muted-foreground mt-1">Selecione a opção que melhor se ajusta às suas necessidades.</p>
+                                    <p className="text-xs text-muted-foreground mt-1">Escolha entre Ideal Adesão / Lagos ou Empresarial (PME / MEI).</p>
                                 </div>
 
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -154,7 +154,7 @@ export default function AmepSimulator() {
                                         </div>
                                         <div>
                                             <div className="flex items-center justify-between">
-                                                <h4 className="font-bold text-foreground">Empresarial / MEI</h4>
+                                                <h4 className="font-bold text-foreground">Empresarial (PME / MEI)</h4>
                                                 <span className="text-[10px] font-black uppercase bg-emerald-600 text-white px-2 py-0.5 rounded-full">A partir de 2 Vidas</span>
                                             </div>
                                             <p className="text-xs text-muted-foreground mt-1">Valores com até 35% de desconto a partir de R$ 82,94/mês.</p>
@@ -175,8 +175,8 @@ export default function AmepSimulator() {
                                         </div>
                                         <div>
                                             <div className="flex items-center justify-between">
-                                                <h4 className="font-bold text-foreground">Individual / Adesão</h4>
-                                                <span className="text-[10px] font-semibold bg-muted text-foreground px-2 py-0.5 rounded-full">12 a 43+ anos</span>
+                                                <h4 className="font-bold text-foreground">Ideal Adesão / Lagos</h4>
+                                                <span className="text-[10px] font-semibold bg-muted text-foreground px-2 py-0.5 rounded-full">Individual</span>
                                             </div>
                                             <p className="text-xs text-muted-foreground mt-1">Contratação para pessoa física a partir de R$ 138,74/mês.</p>
                                         </div>
@@ -207,7 +207,7 @@ export default function AmepSimulator() {
                                     <h3 className="text-xl font-bold text-foreground">
                                         Passo 2: {modalidade === 'pme' ? 'Perfil da Empresa (Vidas & Idade)' : 'Faixa Etária do Titular'}
                                     </h3>
-                                    <p className="text-xs text-muted-foreground mt-1">Informe a estimativa para calcular o valor em tempo real.</p>
+                                    <p className="text-xs text-muted-foreground mt-1">Vendas individuais a partir de 12 anos. Entrevista médica obrigatória por telemedicina de 12 a 18 anos e de 49 anos em diante.</p>
                                 </div>
 
                                 {modalidade === 'pme' ? (
@@ -339,7 +339,7 @@ export default function AmepSimulator() {
                                             disabled={!nome || whatsapp.length < 14}
                                             className="h-12 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg cursor-pointer flex items-center gap-2"
                                         >
-                                            <span>Enviar Cotação no WhatsApp</span>
+                                            <span>Gerar Minha Simulação Gratuita</span>
                                             <Send className="size-4" />
                                         </Button>
                                     </div>
