@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { User, Phone, Building2, Send, Sparkles, Zap, CheckCircle2, ShieldCheck } from 'lucide-react';
+import { User, Phone, Building2, Send, Sparkles, Zap, CheckCircle2, ShieldCheck, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function AmepHero() {
@@ -43,22 +43,22 @@ export default function AmepHero() {
 
     return (
         <section className="relative w-full min-h-[100dvh] pt-24 pb-16 md:pt-32 md:pb-24 flex items-center justify-center bg-background overflow-hidden border-b border-border/40 font-sans select-none">
-            {/* Soft Ambient Background Wash */}
-            <div className="absolute top-0 inset-x-0 h-[550px] bg-gradient-to-b from-emerald-500/10 via-emerald-500/5 to-transparent pointer-events-none -z-10" />
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none -z-10" />
+            {/* Ambient Background Gradient Wash */}
+            <div className="absolute top-0 inset-x-0 h-[600px] bg-gradient-to-b from-emerald-500/10 via-teal-500/5 to-transparent pointer-events-none -z-10" />
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[400px] bg-emerald-500/10 blur-[150px] rounded-full pointer-events-none -z-10" />
 
             <div className="w-full max-w-[1320px] mx-auto px-4 sm:px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                     
-                    {/* Left Column: Value Proposition & Subtle Price Anchors (7 Cols) */}
+                    {/* Left Column: Value Proposition & Spatial Price Anchors (7 Cols) */}
                     <motion.div 
-                        initial={{ opacity: 0, y: 15 }}
+                        initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-7 flex flex-col items-start text-left space-y-6"
                     >
                         {/* Status Tag */}
-                        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wide">
+                        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wide shadow-2xs">
                             <span className="relative flex size-2">
                                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
                                 <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
@@ -66,16 +66,21 @@ export default function AmepHero() {
                             <span>Tabela Promocional Disponível</span>
                         </div>
 
-                        {/* Co-Branding Micro Header */}
-                        <div className="flex items-center gap-2.5">
-                            <Image src="/logo.webp" alt="Âncora Corretora" width={80} height={24} className="h-5 w-auto object-contain dark:brightness-0 dark:invert" priority />
-                            <span className="text-xs text-muted-foreground font-bold">×</span>
-                            <Image src="/amep_saude_logo.png" alt="Amep Saúde" width={85} height={26} className="h-5.5 w-auto object-contain" priority />
+                        {/* Co-Branding Header Pill */}
+                        <div className="flex flex-wrap items-center gap-3 p-2 pr-4 rounded-full bg-muted/60 border border-border/60 backdrop-blur-md shadow-xs">
+                            <div className="flex items-center gap-2 bg-background px-3.5 py-1.5 rounded-full border border-border/40 shadow-2xs">
+                                <Image src="/logo.webp" alt="Âncora Corretora" width={80} height={24} className="h-4.5 sm:h-5.5 w-auto object-contain dark:brightness-0 dark:invert" priority />
+                                <span className="text-xs font-bold text-muted-foreground">×</span>
+                                <div className="bg-white/95 p-1 rounded-md shadow-2xs flex items-center">
+                                    <Image src="/amep_saude_logo.png" alt="Amep Saúde" width={85} height={26} className="h-5 sm:h-6 w-auto object-contain" priority />
+                                </div>
+                            </div>
+                            <span className="text-xs font-semibold text-muted-foreground">Parceria Oficial Autorizada</span>
                         </div>
 
-                        {/* Headline - Clean & Friendly (No heavy technical jargon) */}
+                        {/* Headline - Clean & Friendly (2-3 lines math flow) */}
                         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1] max-w-3xl">
-                            O Plano de Saúde Certo para o Seu Bolso e <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500">Sem Surpresas na Mensalidade</span>.
+                            O Plano de Saúde Certo para o Seu Bolso e <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400">Sem Surpresas na Mensalidade</span>.
                         </h1>
 
                         {/* Subheadline */}
@@ -83,12 +88,13 @@ export default function AmepHero() {
                             Atendimento médico e de urgência em Nova Iguaçu e todo o RJ com parcelas que realmente cabem no seu orçamento familiar ou empresarial.
                         </p>
 
-                        {/* Cards Horizontais de Preço Sutil */}
+                        {/* Cards Horizontais de Preço Sutil (Spatial Depth) */}
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full pt-2">
                             {/* Card Individual */}
                             <motion.div 
-                                whileHover={{ y: -2 }}
-                                className="p-5 rounded-2xl bg-card border border-border/70 hover:border-emerald-500/40 transition-all shadow-xs flex flex-col justify-between"
+                                whileHover={{ y: -3, scale: 1.01 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                className="p-5 rounded-2xl bg-card border border-border/70 hover:border-emerald-500/40 transition-all shadow-[0_10px_30px_rgba(0,0,0,0.03)] flex flex-col justify-between"
                             >
                                 <div>
                                     <span className="text-xs font-bold text-muted-foreground uppercase tracking-wider">Card Individual</span>
@@ -106,10 +112,11 @@ export default function AmepHero() {
 
                             {/* Card CNPJ / MEI */}
                             <motion.div 
-                                whileHover={{ y: -2 }}
-                                className="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-500/60 transition-all shadow-xs flex flex-col justify-between relative overflow-hidden"
+                                whileHover={{ y: -3, scale: 1.01 }}
+                                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                                className="p-5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 hover:border-emerald-500/60 transition-all shadow-[0_10px_30px_rgba(16,185,129,0.08)] flex flex-col justify-between relative overflow-hidden"
                             >
-                                <div className="absolute top-0 right-0 bg-emerald-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-bl-xl uppercase tracking-wider">
+                                <div className="absolute top-0 right-0 bg-emerald-600 text-white text-[10px] font-extrabold px-3 py-1 rounded-bl-xl uppercase tracking-wider shadow-2xs">
                                     Economia PME
                                 </div>
                                 <div>
@@ -127,30 +134,41 @@ export default function AmepHero() {
                             </motion.div>
                         </div>
 
-                        {/* Trust Badges */}
-                        <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-muted-foreground font-medium">
-                            <div className="flex items-center gap-2">
-                                <ShieldCheck className="size-4 text-emerald-500" />
-                                <span>Atendimento no Hospital Prontonil</span>
+                        {/* Customer Visual Feature Strip */}
+                        <div className="w-full p-4 rounded-2xl bg-muted/40 border border-border/50 flex flex-col sm:flex-row items-center gap-4 shadow-2xs">
+                            <div className="flex -space-x-3 shrink-0">
+                                <div className="relative size-11 rounded-full border-2 border-background overflow-hidden shadow-xs">
+                                    <Image src="/image1.png" alt="Cliente AMEP Saúde" fill className="object-cover object-center" />
+                                </div>
+                                <div className="relative size-11 rounded-full border-2 border-background overflow-hidden shadow-xs">
+                                    <Image src="/image3.png" alt="Equipe AMEP PME" fill className="object-cover object-center" />
+                                </div>
+                                <div className="relative size-11 rounded-full border-2 border-background overflow-hidden shadow-xs">
+                                    <Image src="/image4.png" alt="Atendimento AMEP" fill className="object-cover object-center" />
+                                </div>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <Building2 className="size-4 text-emerald-500" />
-                                <span>Sede própria em Nova Iguaçu</span>
+                            <div className="text-left">
+                                <p className="text-xs font-bold text-foreground">
+                                    Mais de 15.000 vidas protegidas pelo AMEP SAÚDE
+                                </p>
+                                <p className="text-[11px] text-muted-foreground mt-0.5">
+                                    Suporte direto do Hospital Prontonil e consultoria Âncora no Centro de Nova Iguaçu.
+                                </p>
                             </div>
                         </div>
 
                     </motion.div>
 
-                    {/* Right Column: Lead Form (5 Cols) */}
+                    {/* Right Column: Glassmorphic Lead Form (5 Cols) */}
                     <motion.div 
                         initial={{ opacity: 0, scale: 0.96 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-5 w-full max-w-md mx-auto"
                     >
-                        <div className="relative rounded-3xl bg-background/95 dark:bg-background/95 backdrop-blur-2xl border border-border/80 p-6 sm:p-8 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] overflow-hidden">
+                        <div className="relative rounded-3xl bg-background/95 dark:bg-background/95 backdrop-blur-2xl border border-border/80 p-6 sm:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.12)] overflow-hidden">
                             
-                            {/* Top Decorative Border Accent */}
+                            {/* Top Decorative Gradient Accent */}
                             <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-500" />
 
                             <div className="flex items-center justify-between gap-2 mb-4">
@@ -158,7 +176,9 @@ export default function AmepHero() {
                                     <Sparkles className="size-4" />
                                     <span>Tabela Amep Saúde</span>
                                 </div>
-                                <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={80} height={26} className="h-6 w-auto object-contain" />
+                                <div className="bg-white/90 px-2 py-1 rounded-lg border border-border/40 shadow-2xs">
+                                    <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={80} height={26} className="h-6 w-auto object-contain" />
+                                </div>
                             </div>
 
                             <div className="flex flex-col items-start text-left space-y-1 mb-6">
@@ -203,7 +223,7 @@ export default function AmepHero() {
                                     </div>
                                 </div>
 
-                                {/* Seletor de Perfil */}
+                                {/* Seletor de Perfil (High Contrast Options) */}
                                 <div className="space-y-1.5">
                                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Perfil de Contratação</label>
                                     <div className="relative">

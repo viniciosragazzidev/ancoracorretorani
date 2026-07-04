@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { MessageSquare, ShieldCheck, CheckCircle2, PhoneCall } from 'lucide-react';
+import { MessageSquare, ShieldCheck, PhoneCall } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function AmepCta() {
@@ -13,8 +13,8 @@ export default function AmepCta() {
 
     return (
         <section className="w-full py-16 sm:py-24 bg-slate-950 text-white font-sans select-none relative overflow-hidden">
-            {/* Subtle Accent Glows */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-emerald-500/10 blur-[130px] rounded-full pointer-events-none" />
+            {/* Subtle Ambient Accent Glows */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none" />
 
             <div className="w-full max-w-[1100px] mx-auto px-4 sm:px-6 relative z-10">
                 <motion.div 
@@ -22,16 +22,32 @@ export default function AmepCta() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="rounded-3xl bg-slate-900 border border-slate-800 p-8 sm:p-12 md:p-14 shadow-2xl text-center flex flex-col items-center space-y-6 relative overflow-hidden"
+                    className="rounded-3xl bg-slate-900 border border-slate-800/80 p-8 sm:p-12 md:p-14 shadow-2xl text-center flex flex-col items-center space-y-6 relative overflow-hidden"
                 >
                     {/* Top Green Accent Bar */}
                     <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500" />
 
-                    {/* Co-Branding Micro Badge */}
-                    <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-xs font-semibold text-emerald-400">
-                        <Image src="/logo.webp" alt="Âncora Corretora" width={70} height={20} className="h-4 w-auto object-contain brightness-0 invert" />
+                    {/* Co-Branding Header Pill with Inverted Dark Logos */}
+                    <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-800/90 border border-slate-700/80 text-xs font-semibold shadow-inner">
+                        {/* Logo Âncora Inverted for Dark Background */}
+                        <Image 
+                            src="/logo.webp" 
+                            alt="Âncora Corretora" 
+                            width={75} 
+                            height={22} 
+                            className="h-4.5 w-auto object-contain brightness-0 invert drop-shadow-[0_1px_4px_rgba(255,255,255,0.2)]" 
+                        />
                         <span className="text-slate-500 font-bold">×</span>
-                        <Image src="/amep_saude_logo.png" alt="Amep Saúde" width={75} height={22} className="h-5 w-auto object-contain" />
+                        {/* Logo Amep Saúde wrapped in clean light pill */}
+                        <div className="bg-white/95 px-2 py-0.5 rounded-md shadow-2xs flex items-center">
+                            <Image 
+                                src="/amep_saude_logo.png" 
+                                alt="Amep Saúde" 
+                                width={75} 
+                                height={22} 
+                                className="h-4.5 w-auto object-contain" 
+                            />
+                        </div>
                     </div>
 
                     {/* Headline */}
