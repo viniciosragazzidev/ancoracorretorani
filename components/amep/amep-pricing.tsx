@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { FileText, ShieldCheck, ArrowRight, Zap } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import SplitText from '@/components/split-text';
 
 const tabelaPrecos = [
     { faixa: "00 a 18 anos", individual: "138,74", pme: "82,94" },
@@ -28,19 +28,30 @@ export default function AmepPricing() {
                 
                 {/* Header */}
                 <div className="flex flex-col items-center text-center space-y-3 mb-10">
-                    <div className="flex items-center gap-2">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                    <div className="flex items-center gap-3">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-wide">
                             <FileText className="size-3.5" />
                             <span>Tabela de Referência Amep</span>
                         </div>
-                        <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={75} height={22} className="h-5 w-auto object-contain" />
+                        <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={110} height={32} className="h-6 sm:h-7 w-auto object-contain" />
                     </div>
 
-                    <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight max-w-2xl">
+                    <SplitText
+                        tag="h2"
+                        textAlign="center"
+                        className="text-3xl sm:text-4xl lg:text-[48px] font-semibold tracking-tighter text-foreground leading-[1.1] max-w-2xl"
+                        delay={15}
+                        duration={0.9}
+                        ease="power3.out"
+                        splitType="words"
+                        from={{ opacity: 0, y: 25 }}
+                        to={{ opacity: 1, y: 0 }}
+                        threshold={0.1}
+                    >
                         Quanto custa o plano?
-                    </h2>
+                    </SplitText>
 
-                    <p className="text-sm sm:text-base text-muted-foreground max-w-xl">
+                    <p className="text-muted-foreground text-base sm:text-lg max-w-xl font-light leading-relaxed">
                         Valores divididos por faixa etária. Sem taxas escondidas.
                     </p>
                 </div>

@@ -14,35 +14,33 @@ export default function AmepFooter() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-10 md:gap-8 pb-12 w-full text-left">
                     
                     {/* Column 1: Branding (4 cols) */}
-                    <div className="md:col-span-4 flex flex-col space-y-4">
+                    <div className="md:col-span-4 flex flex-col space-y-5">
                         <div className="flex items-center gap-3">
                             <Link href="/" className="inline-block">
                                 <Image 
                                     src="/logo.webp" 
                                     alt="Âncora Corretora" 
-                                    width={130} 
-                                    height={36} 
-                                    className="h-8 w-auto object-contain brightness-0 invert" 
+                                    width={140} 
+                                    height={40} 
+                                    className="h-8.5 w-auto object-contain brightness-0 invert" 
                                     priority
                                 />
                             </Link>
-                            <span className="text-neutral-600 font-bold text-xs">×</span>
-                            <div className="bg-white/10 p-1.5 rounded-lg border border-white/10">
-                                <Image 
-                                    src="/amep_saude_logo.png" 
-                                    alt="Amep Saúde" 
-                                    width={90} 
-                                    height={28} 
-                                    className="h-6 w-auto object-contain" 
-                                    priority
-                                />
-                            </div>
+                            <span className="text-neutral-600 font-bold text-sm">×</span>
+                            <Image 
+                                src="/amep_saude_logo.png" 
+                                alt="Amep Saúde" 
+                                width={120} 
+                                height={36} 
+                                className="h-8 w-auto object-contain brightness-0 invert drop-shadow-[0_1px_8px_rgba(255,255,255,0.3)]" 
+                                priority
+                            />
                         </div>
 
                         <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed max-w-sm">
-                            Corretora Autorizada AMEP Saúde na Baixada Fluminense. Transparência, cotações imbatíveis sem coparticipação e suporte humanizado do primeiro contato ao pós-venda.
+                            Corretora Autorizada AMEP Saúde na Baixada Fluminense. Transparência, cotações imbatíveis e suporte humanizado do primeiro contato ao pós-venda.
                         </p>
-                        <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 w-fit">
+                        <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-3.5 py-1.5 rounded-full border border-emerald-500/20 w-fit">
                             <ShieldCheck className="size-4 shrink-0 text-emerald-400" />
                             <span>Registro ANS nº 413330</span>
                         </div>
@@ -89,7 +87,7 @@ export default function AmepFooter() {
                             </li>
                             <li className="flex items-start gap-2.5">
                                 <span className="text-neutral-500 font-medium whitespace-nowrap mt-0.5">Horário:</span>
-                                <span>Seg a Sex: 09h às 18h<br/>Sáb: 08h às 18h</span>
+                                <span>Seg a Sex: 09h às 18h<br/>Sáb: 08h às 18h<br/>Domingo: Fechado</span>
                             </li>
                         </ul>
                     </div>

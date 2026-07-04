@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { MessageSquare, ShieldCheck, PhoneCall } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import SplitText from '@/components/split-text';
 
 export default function AmepCta() {
     const handleCtaClick = () => {
@@ -12,56 +13,66 @@ export default function AmepCta() {
     };
 
     return (
-        <section className="w-full py-16 sm:py-24 bg-slate-950 text-white font-sans select-none relative overflow-hidden">
-            {/* Subtle Ambient Accent Glows */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none" />
+        <section className="w-full py-20 sm:py-28 bg-neutral-950 text-white font-sans select-none relative overflow-hidden">
+            {/* Background Image Overlay */}
+            <div className="absolute inset-0 -z-10 bg-[url('/bg_hero.jpg')] bg-cover bg-center bg-no-repeat opacity-15 mix-blend-luminosity grayscale contrast-125 pointer-events-none" />
 
-            <div className="w-full max-w-[1100px] mx-auto px-4 sm:px-6 relative z-10">
+            {/* Ambient Accent Radial Glows */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-emerald-500/15 blur-[160px] rounded-full pointer-events-none" />
+
+            <div className="w-full max-w-[1150px] mx-auto px-4 sm:px-6 relative z-10">
                 <motion.div 
-                    initial={{ opacity: 0, scale: 0.97 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="rounded-3xl bg-slate-900 border border-slate-800/80 p-8 sm:p-12 md:p-14 shadow-2xl text-center flex flex-col items-center space-y-6 relative overflow-hidden"
+                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                    className="rounded-3xl bg-neutral-900/90 backdrop-blur-2xl border border-neutral-800/80 p-8 sm:p-14 md:p-16 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)] text-center flex flex-col items-center space-y-6 relative overflow-hidden"
                 >
                     {/* Top Green Accent Bar */}
                     <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500" />
 
                     {/* Co-Branding Header Pill with Inverted Dark Logos */}
-                    <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-slate-800/90 border border-slate-700/80 text-xs font-semibold shadow-inner">
-                        {/* Logo Âncora Inverted for Dark Background */}
+                    <div className="inline-flex items-center gap-3 px-5 py-2.5 rounded-full bg-neutral-800/90 border border-neutral-700/80 text-xs font-semibold shadow-inner">
                         <Image 
                             src="/logo.webp" 
                             alt="Âncora Corretora" 
-                            width={75} 
-                            height={22} 
-                            className="h-4.5 w-auto object-contain brightness-0 invert drop-shadow-[0_1px_4px_rgba(255,255,255,0.2)]" 
+                            width={90} 
+                            height={26} 
+                            className="h-5.5 w-auto object-contain brightness-0 invert drop-shadow-[0_1px_4px_rgba(255,255,255,0.2)]" 
                         />
-                        <span className="text-slate-500 font-bold">×</span>
-                        {/* Logo Amep Saúde wrapped in clean light pill */}
-                        <div className="bg-white/95 px-2 py-0.5 rounded-md shadow-2xs flex items-center">
-                            <Image 
-                                src="/amep_saude_logo.png" 
-                                alt="Amep Saúde" 
-                                width={75} 
-                                height={22} 
-                                className="h-4.5 w-auto object-contain" 
-                            />
-                        </div>
+                        <span className="text-neutral-500 font-bold">×</span>
+                        <Image 
+                            src="/amep_saude_logo.png" 
+                            alt="Amep Saúde" 
+                            width={110} 
+                            height={32} 
+                            className="h-6.5 w-auto object-contain brightness-0 invert drop-shadow-[0_1px_8px_rgba(255,255,255,0.3)]" 
+                        />
                     </div>
 
-                    {/* Headline */}
-                    <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-white max-w-3xl leading-tight">
-                        Garanta as condições especiais de carência zero antes que a campanha termine.
-                    </h2>
+                    {/* Headline Animated via SplitText */}
+                    <SplitText
+                        tag="h2"
+                        textAlign="center"
+                        className="text-3xl sm:text-4xl lg:text-[48px] font-semibold tracking-tighter text-white leading-[1.1] max-w-3xl"
+                        delay={15}
+                        duration={0.9}
+                        ease="power3.out"
+                        splitType="words"
+                        from={{ opacity: 0, y: 25 }}
+                        to={{ opacity: 1, y: 0 }}
+                        threshold={0.1}
+                    >
+                        Fale com a Âncora Corretora e garanta as condições de Junho.
+                    </SplitText>
 
                     {/* Subheadline */}
-                    <p className="text-sm sm:text-base text-slate-300 max-w-2xl font-normal leading-relaxed">
-                        Clique no botão abaixo para falar direto com um consultor da Âncora no WhatsApp e receber sua proposta digital.
+                    <p className="text-muted-foreground text-base sm:text-lg max-w-2xl leading-relaxed font-light">
+                        Receba o comparativo de carências e prazos de vigência direto no seu celular. Atendimento especializado focado no município do Rio de Janeiro e região de abrangência.
                     </p>
 
                     {/* Action CTA Button */}
-                    <div className="pt-2 w-full max-w-sm">
+                    <div className="pt-3 w-full max-w-sm">
                         <Button
                             onClick={handleCtaClick}
                             size="lg"
@@ -73,7 +84,7 @@ export default function AmepCta() {
                     </div>
 
                     {/* Guarantee Footer */}
-                    <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-xs text-slate-400 font-medium">
+                    <div className="pt-4 flex flex-wrap items-center justify-center gap-6 text-xs text-neutral-400 font-medium">
                         <div className="flex items-center gap-2">
                             <ShieldCheck className="size-4 text-emerald-400" />
                             <span>Atendimento imediato e sem compromisso</span>

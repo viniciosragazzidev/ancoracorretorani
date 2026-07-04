@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Zap, Hospital, ClipboardCheck, ArrowRight, CheckCircle2, ShieldCheck, Stethoscope } from 'lucide-react';
+import { Zap, Hospital, ClipboardCheck, ArrowRight, CheckCircle2, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import SplitText from '@/components/split-text';
 
 type TabKey = 'beneficio' | 'hospitais' | 'regras';
 
@@ -66,16 +67,27 @@ export default function AmepTabs() {
                 
                 {/* Header */}
                 <div className="flex flex-col items-center text-center space-y-3 mb-10">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-wide">
                         <Zap className="size-3.5" />
                         <span>Por que escolher a Amep Saúde?</span>
                     </div>
 
-                    <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight max-w-3xl">
+                    <SplitText
+                        tag="h2"
+                        textAlign="center"
+                        className="text-3xl sm:text-4xl lg:text-[48px] font-semibold tracking-tighter text-foreground leading-[1.1] max-w-3xl"
+                        delay={15}
+                        duration={0.9}
+                        ease="power3.out"
+                        splitType="words"
+                        from={{ opacity: 0, y: 25 }}
+                        to={{ opacity: 1, y: 0 }}
+                        threshold={0.1}
+                    >
                         Diferenciais Práticos para Facilitar a Sua Vida
-                    </h2>
+                    </SplitText>
 
-                    <p className="text-sm sm:text-base text-muted-foreground max-w-xl">
+                    <p className="text-muted-foreground text-base sm:text-lg max-w-xl font-light leading-relaxed">
                         Clique nas abas abaixo para explorar os benefícios, rede de hospitais e regras simples.
                     </p>
                 </div>
@@ -149,23 +161,26 @@ export default function AmepTabs() {
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeTab}
-                            initial={{ opacity: 0, y: 12 }}
+                            initial={{ opacity: 0, y: 15 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -12 }}
-                            transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
+                            exit={{ opacity: 0, y: -15 }}
+                            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                             className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center"
                         >
                             {/* Text & Micro CTA (7 Cols) */}
                             <div className="lg:col-span-7 space-y-6">
-                                <span className="inline-block text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full">
-                                    {currentTab.badge}
-                                </span>
+                                <div className="flex items-center gap-3">
+                                    <span className="inline-block text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded-full">
+                                        {currentTab.badge}
+                                    </span>
+                                    <Image src="/amep_saude_logo.png" alt="Amep Saúde" width={100} height={28} className="h-6 w-auto object-contain" />
+                                </div>
 
-                                <h3 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
+                                <h3 className="text-2xl sm:text-4xl font-bold text-foreground tracking-tight leading-tight">
                                     {currentTab.title}
                                 </h3>
 
-                                <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
+                                <p className="text-muted-foreground text-base sm:text-lg leading-relaxed font-light">
                                     {currentTab.text}
                                 </p>
 

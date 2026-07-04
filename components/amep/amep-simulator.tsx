@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calculator, Users, User, ArrowLeft, ArrowRight, Send, CheckCircle2, ShieldCheck, Sparkles, Building2 } from 'lucide-react';
+import { Calculator, User, ArrowLeft, ArrowRight, Send, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import SplitText from '@/components/split-text';
 
 export default function AmepSimulator() {
     const [step, setStep] = useState(1);
@@ -73,19 +74,30 @@ export default function AmepSimulator() {
                 
                 {/* Header */}
                 <div className="flex flex-col items-center text-center space-y-3 mb-10">
-                    <div className="flex items-center gap-2">
-                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                    <div className="flex items-center gap-3">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-xs font-semibold tracking-wide">
                             <Calculator className="size-3.5" />
                             <span>Simulador Instantâneo Amep</span>
                         </div>
-                        <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={75} height={22} className="h-5 w-auto object-contain" />
+                        <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={110} height={32} className="h-6 sm:h-7 w-auto object-contain" />
                     </div>
 
-                    <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight max-w-2xl">
+                    <SplitText
+                        tag="h2"
+                        textAlign="center"
+                        className="text-3xl sm:text-4xl lg:text-[48px] font-semibold tracking-tighter text-foreground leading-[1.1] max-w-2xl"
+                        delay={15}
+                        duration={0.9}
+                        ease="power3.out"
+                        splitType="words"
+                        from={{ opacity: 0, y: 25 }}
+                        to={{ opacity: 1, y: 0 }}
+                        threshold={0.1}
+                    >
                         Pronto para pagar menos e ter segurança de atendimento?
-                    </h2>
+                    </SplitText>
 
-                    <p className="text-sm sm:text-base text-muted-foreground max-w-xl">
+                    <p className="text-muted-foreground text-base sm:text-lg max-w-xl font-light leading-relaxed">
                         Simule em 3 cliques o valor consolidado para você, sua família ou sua empresa na Amep Saúde.
                     </p>
                 </div>
