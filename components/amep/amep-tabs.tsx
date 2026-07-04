@@ -12,14 +12,15 @@ type TabKey = 'beneficio' | 'hospitais' | 'regras';
 const tabsData = {
     beneficio: {
         id: 'beneficio',
-        badge: 'Benefício Comercial',
-        title: 'Contrate e use imediatamente.',
-        text: 'Durante esta campanha, você garante Carência ZERO para consultas nas especialidades médicas da rede própria Amep. É assinar e começar a agendar.',
-        ctaText: 'Quero Consultas Sem Espera',
+        badge: 'Benefício Promocional',
+        title: 'Aproveite a carência zero para consultas.',
+        text: 'Durante todo o mês de junho, os novos beneficiários contarão com Carência Zero para consultas nas especialidades médicas da Rede Própria AMEP Saúde.',
+        ctaText: 'Falar com Consultor no WhatsApp',
         ctaAction: 'whatsapp',
         imageSrc: '/image5.png',
         imageAlt: 'Atendimento e consultas Amep Saúde',
-        highlights: ['Consultas médicas sem espera', 'Sem taxa de adesão extra', 'Rede Própria AMEP']
+        imagePosition: 'object-center',
+        highlights: ['Campanha válida apenas em Junho/2026', 'Carência Zero imediata', 'Rede Própria AMEP']
     },
     hospitais: {
         id: 'hospitais',
@@ -30,6 +31,7 @@ const tabsData = {
         ctaAction: 'scrollSimulador',
         imageSrc: '/image4.png',
         imageAlt: 'Hospital Geral Prontonil Nova Iguaçu AMEP',
+        imagePosition: 'object-top',
         highlights: ['Hospital Prontonil Nova Iguaçu', 'Suporte Adulto & Pediátrico', 'Hospitais Caxias, Bangu, RJ']
     },
     regras: {
@@ -41,6 +43,7 @@ const tabsData = {
         ctaAction: 'scrollSimulador',
         imageSrc: '/image2.png',
         imageAlt: 'Contratação Amep Saúde para famílias e PME',
+        imagePosition: 'object-center',
         highlights: ['Vendas a partir de 12 anos completos', 'Desconto MEI / CNPJ até 35%', 'Sem exigência de vínculo']
     }
 };
@@ -213,7 +216,7 @@ export default function AmepTabs() {
                                     alt={currentTab.imageAlt}
                                     fill
                                     priority
-                                    className="object-cover object-center"
+                                    className={`object-cover ${currentTab.imagePosition}`}
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
                                 <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2 text-white text-xs font-semibold">

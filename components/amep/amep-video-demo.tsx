@@ -50,7 +50,7 @@ export default function AmepVideoDemo() {
                     className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-3xl overflow-hidden border border-border/80 shadow-2xl cursor-pointer group bg-slate-950"
                 >
                     <Image 
-                        src="/image5.png" 
+                        src="/video_bg.jpg" 
                         alt="Apresentação Amep Saúde Nova Iguaçu" 
                         fill 
                         className="object-cover object-center group-hover:scale-105 transition-transform duration-700 opacity-80" 
@@ -106,7 +106,7 @@ export default function AmepVideoDemo() {
                             </button>
                             <iframe
                                 className="w-full h-full"
-                                src="https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ?autoplay=1"
+                                src="https://www.youtube-nocookie.com/embed/BquV_PV8upw?autoplay=1"
                                 title="Apresentação Amep Saúde Nova Iguaçu"
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                                 allowFullScreen
