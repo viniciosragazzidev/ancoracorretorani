@@ -1,23 +1,24 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Building2, MapPin, Stethoscope, HeartPulse, ShieldAlert, CheckCircle2 } from 'lucide-react';
+import { Building2, MapPin, HeartPulse } from 'lucide-react';
 
 const hospitals = [
     {
         name: "Hospital Prontonil",
         city: "Nova Iguaçu - Centro",
         region: "Baixada Fluminense (Destaque)",
-        description: "Referência em atendimento Adulto e Pediátrico no coração da Baixada Fluminense. Estrutura completa de urgência e emergência.",
-        badges: ["Adulto & Pediátrico", "Urgência 24h", "Baixada Fluminense"],
+        description: "Referência em atendimento Adulto e Pediátrico no coração da Baixada Fluminense. Estrutura completa de urgência, emergência e repouso até 12h AMEP.",
+        badges: ["Adulto & Pediátrico", "Urgência 24h AMEP", "Baixada Fluminense"],
         featured: true
     },
     {
         name: "Hospital Santa Branca",
         city: "Duque de Caxias",
         region: "Baixada Fluminense",
-        description: "Suporte completo e atendimento Adulto ágil na região, com corpo médico especializado em urgências.",
+        description: "Suporte completo e atendimento Adulto ágil na região de Caxias, com suporte médico para emergências AMEP.",
         badges: ["Atendimento Adulto", "Urgência & Emergência"],
         featured: false
     },
@@ -25,7 +26,7 @@ const hospitals = [
         name: "Hospital São Matheus",
         city: "Bangu",
         region: "Zona Oeste RJ",
-        description: "Estrutura moderna para suporte Adulto e Pediátrico com pronto-socorro estruturado de fácil acesso.",
+        description: "Estrutura moderna para suporte Adulto e Pediátrico com pronto-socorro estruturado credenciado AMEP Saúde.",
         badges: ["Adulto & Pediátrico", "Pronto-Socorro 24h"],
         featured: false
     },
@@ -33,7 +34,7 @@ const hospitals = [
         name: "Hospital Énio Serra & São Victor",
         city: "Laranjeiras & Tijuca",
         region: "Zona Sul & Zona Norte RJ",
-        description: "Cobertura de urgência estrategicamente localizada para garantir socorro rápido na Zona Sul e Zona Norte da capital.",
+        description: "Cobertura de urgência estrategicamente localizada para socorro rápido AMEP na Zona Sul e Zona Norte da capital.",
         badges: ["Zona Sul & Zona Norte", "Urgência Adulto"],
         featured: false
     }
@@ -46,17 +47,20 @@ export default function AmepHospitals() {
                 
                 {/* Section Header */}
                 <div className="flex flex-col items-center text-center space-y-3 mb-12">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-wider">
-                        <Building2 className="size-3.5" />
-                        <span>Rede Credenciada & Própria</span>
+                    <div className="flex items-center gap-2">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                            <Building2 className="size-3.5" />
+                            <span>Rede Própria & Credenciada AMEP</span>
+                        </div>
+                        <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={75} height={22} className="h-5 w-auto object-contain" />
                     </div>
 
                     <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight max-w-3xl">
-                        Principais Hospitais de Urgência e Emergência Próximos de Você
+                        Principais Hospitais de Urgência AMEP Próximos de Você
                     </h2>
 
                     <p className="text-sm sm:text-base text-muted-foreground max-w-2xl">
-                        Cobertura estratégica na Baixada Fluminense e nas principais zonas do Rio de Janeiro para atendimento médico quando você mais precisa.
+                        Atendimento com o destaque do <strong className="text-foreground font-semibold">Hospital Prontonil no Centro de Nova Iguaçu</strong> e cobertura regional.
                     </p>
                 </div>
 
@@ -69,21 +73,21 @@ export default function AmepHospitals() {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.1 }}
                             transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className={`rounded-2xl p-6 flex flex-col justify-between text-left transition-all duration-300 ${
+                            className={`rounded-3xl p-6 flex flex-col justify-between text-left transition-all duration-300 ${
                                 hospital.featured
-                                    ? 'bg-gradient-to-b from-emerald-500/10 via-background to-background border-2 border-emerald-500/40 shadow-lg shadow-emerald-500/5 relative'
-                                    : 'bg-muted/30 border border-border/60 hover:border-border hover:bg-muted/50'
+                                    ? 'bg-emerald-500/10 border-2 border-emerald-500/50 shadow-lg relative'
+                                    : 'bg-card border border-border/70 hover:border-emerald-500/40'
                             }`}
                         >
                             {hospital.featured && (
-                                <div className="absolute -top-3 left-6 bg-emerald-600 text-white text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider shadow-sm">
-                                    Hospital Principal
+                                <div className="absolute -top-3 left-6 bg-emerald-600 text-white text-[10px] font-extrabold px-3 py-0.5 rounded-full uppercase tracking-wider shadow-xs">
+                                    Hospital Principal AMEP
                                 </div>
                             )}
 
                             <div className="space-y-4">
                                 <div className="flex items-start justify-between gap-2">
-                                    <div className="size-10 rounded-xl bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                                    <div className="size-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
                                         <HeartPulse className="size-5" />
                                     </div>
                                     <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-md">
@@ -96,7 +100,7 @@ export default function AmepHospitals() {
                                         {hospital.name}
                                     </h3>
                                     <div className="flex items-center gap-1 mt-1 text-xs text-muted-foreground font-medium">
-                                        <MapPin className="size-3.5 text-primary shrink-0" />
+                                        <MapPin className="size-3.5 text-emerald-500 shrink-0" />
                                         <span>{hospital.city}</span>
                                     </div>
                                 </div>
