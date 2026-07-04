@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Zap, Clock, ShieldCheck, CheckCircle2, ArrowRight, Stethoscope } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -28,7 +29,7 @@ export default function AmepPromo() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.2 }}
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative rounded-3xl bg-gradient-to-br from-emerald-900/40 via-background/95 to-emerald-950/50 border border-emerald-500/30 p-8 sm:p-12 shadow-[0_25px_60px_-15px_rgba(16,185,129,0.15)] backdrop-blur-xl overflow-hidden"
+                    className="relative rounded-3xl bg-gradient-to-br from-emerald-950/80 via-background/95 to-slate-900/90 border border-emerald-500/30 p-8 sm:p-12 shadow-[0_25px_60px_-15px_rgba(16,185,129,0.15)] backdrop-blur-xl overflow-hidden"
                 >
                     {/* Top Accent Strip */}
                     <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-500" />
@@ -37,13 +38,19 @@ export default function AmepPromo() {
                         
                         {/* Text Content (8 Cols) */}
                         <div className="lg:col-span-8 space-y-5">
-                            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                                <Zap className="size-4 fill-emerald-400" />
-                                <span>Campanha Comercial Exclusiva</span>
+                            <div className="flex flex-wrap items-center gap-3">
+                                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/20 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                                    <Zap className="size-4 fill-emerald-400" />
+                                    <span>Campanha Comercial Exclusiva</span>
+                                </div>
+                                <div className="bg-background/90 px-3 py-1 rounded-full border border-border/40 flex items-center gap-2 shadow-2xs">
+                                    <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={70} height={22} className="h-5 w-auto object-contain" />
+                                    <span className="text-[11px] font-semibold text-muted-foreground">Rede Própria</span>
+                                </div>
                             </div>
 
                             <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight leading-tight">
-                                Contrate Agora e Tenha <span className="text-emerald-500 underline decoration-emerald-500/30 underline-offset-8">Carência ZERO para Consultas</span>.
+                                Contrate Agora e Tenha <span className="text-emerald-400 underline decoration-emerald-500/30 underline-offset-8">Carência ZERO para Consultas</span>.
                             </h2>
 
                             <p className="text-base sm:text-lg text-muted-foreground leading-relaxed font-normal max-w-3xl">
@@ -51,25 +58,35 @@ export default function AmepPromo() {
                             </p>
 
                             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-3">
-                                <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-border/40">
+                                <div className="flex items-center gap-3 p-3.5 rounded-xl bg-background/70 border border-border/60 shadow-2xs">
                                     <Stethoscope className="size-5 text-emerald-500 shrink-0" />
                                     <span className="text-xs font-semibold text-foreground">Consultas Sem Espera</span>
                                 </div>
-                                <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-border/40">
+                                <div className="flex items-center gap-3 p-3.5 rounded-xl bg-background/70 border border-border/60 shadow-2xs">
                                     <Clock className="size-5 text-emerald-500 shrink-0" />
                                     <span className="text-xs font-semibold text-foreground">Liberação Imediata</span>
                                 </div>
-                                <div className="flex items-center gap-3 p-3 rounded-xl bg-background/50 border border-border/40">
+                                <div className="flex items-center gap-3 p-3.5 rounded-xl bg-background/70 border border-border/60 shadow-2xs">
                                     <ShieldCheck className="size-5 text-emerald-500 shrink-0" />
-                                    <span>Rede Própria AMEP</span>
+                                    <span className="text-xs font-semibold text-foreground">Rede Própria AMEP</span>
                                 </div>
                             </div>
                         </div>
 
-                        {/* CTA Box (4 Cols) */}
-                        <div className="lg:col-span-4 flex flex-col items-stretch justify-center p-6 rounded-2xl bg-background/80 border border-border/60 shadow-inner space-y-4">
+                        {/* CTA Box with Image Preview (4 Cols) */}
+                        <div className="lg:col-span-4 flex flex-col items-stretch justify-center p-6 rounded-2xl bg-background/90 border border-border/70 shadow-xl space-y-4 text-left relative overflow-hidden">
+                            <div className="relative w-full h-32 rounded-xl overflow-hidden mb-1 border border-border/40 shadow-inner">
+                                <Image src="/image5.png" alt="Família atendida pela Amep Saúde" fill className="object-cover" />
+                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                                <div className="absolute bottom-2 left-3 right-3 flex items-center justify-between">
+                                    <span className="text-[10px] font-bold text-white uppercase tracking-wider bg-emerald-600/90 px-2 py-0.5 rounded-md">
+                                        Atendimento Prontonil
+                                    </span>
+                                </div>
+                            </div>
+
                             <div className="text-center space-y-1">
-                                <span className="text-xs font-bold uppercase tracking-wider text-emerald-500">Vagas Promocionais</span>
+                                <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Vagas Promocionais</span>
                                 <p className="text-xl font-extrabold text-foreground">Aproveite Tabela Atualizada</p>
                             </div>
 

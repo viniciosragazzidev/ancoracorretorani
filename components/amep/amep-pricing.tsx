@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ShieldCheck, Zap, Users, User, ArrowRight, CheckCircle2, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -38,9 +39,12 @@ export default function AmepPricing() {
                 
                 {/* Header */}
                 <div className="flex flex-col items-center text-center space-y-3 mb-10">
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                        <FileText className="size-3.5" />
-                        <span>Tabela Comercial Sem Pegadinhas</span>
+                    <div className="flex items-center gap-2">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                            <FileText className="size-3.5" />
+                            <span>Tabela Comercial Sem Pegadinhas</span>
+                        </div>
+                        <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={75} height={22} className="h-5 w-auto object-contain" />
                     </div>
 
                     <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight max-w-3xl">
@@ -87,15 +91,18 @@ export default function AmepPricing() {
                 {/* Table Container */}
                 <div className="relative rounded-3xl bg-background border border-border/70 shadow-xl overflow-hidden text-left">
                     <div className="p-4 sm:p-6 bg-muted/40 border-b border-border/60 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                        <div>
-                            <h3 className="text-lg font-bold text-foreground">
-                                {activeTab === 'pme' ? 'Linha Smart PME / MEI (Empresarial)' : 'Linha Ideal Adesão (Individual / CPF)'}
-                            </h3>
-                            <p className="text-xs text-muted-foreground mt-0.5">
-                                {activeTab === 'pme' 
-                                    ? 'Para quem possui MEI ou CNPJ. Inclua sócios, colaboradores ou familiares sem exigência de vínculo.' 
-                                    : 'Para contratação individual a partir de 12 anos completos.'}
-                            </p>
+                        <div className="flex items-center gap-3">
+                            <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={80} height={24} className="h-6 w-auto object-contain shrink-0" />
+                            <div>
+                                <h3 className="text-lg font-bold text-foreground">
+                                    {activeTab === 'pme' ? 'Linha Smart PME / MEI (Empresarial)' : 'Linha Ideal Adesão (Individual / CPF)'}
+                                </h3>
+                                <p className="text-xs text-muted-foreground mt-0.5">
+                                    {activeTab === 'pme' 
+                                        ? 'Para quem possui MEI ou CNPJ. Inclua sócios, colaboradores ou familiares sem exigência de vínculo.' 
+                                        : 'Para contratação individual a partir de 12 anos completos.'}
+                                </p>
+                            </div>
                         </div>
                         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-semibold shrink-0">
                             <ShieldCheck className="size-3.5" />

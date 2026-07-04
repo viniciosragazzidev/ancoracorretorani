@@ -3,7 +3,6 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, ShieldCheck } from 'lucide-react';
 
 export default function AmepFooter() {
@@ -16,21 +15,35 @@ export default function AmepFooter() {
                     
                     {/* Column 1: Branding (4 cols) */}
                     <div className="md:col-span-4 flex flex-col space-y-4">
-                        <Link href="/" className="inline-block">
-                            <Image 
-                                src="/logo.webp" 
-                                alt="Âncora Corretora" 
-                                width={140} 
-                                height={40} 
-                                className="h-8 w-auto object-contain brightness-0 invert" 
-                                priority
-                            />
-                        </Link>
+                        <div className="flex items-center gap-3">
+                            <Link href="/" className="inline-block">
+                                <Image 
+                                    src="/logo.webp" 
+                                    alt="Âncora Corretora" 
+                                    width={130} 
+                                    height={36} 
+                                    className="h-8 w-auto object-contain brightness-0 invert" 
+                                    priority
+                                />
+                            </Link>
+                            <span className="text-neutral-600 font-bold text-xs">×</span>
+                            <div className="bg-white/10 p-1.5 rounded-lg border border-white/10">
+                                <Image 
+                                    src="/amep_saude_logo.png" 
+                                    alt="Amep Saúde" 
+                                    width={90} 
+                                    height={28} 
+                                    className="h-6 w-auto object-contain" 
+                                    priority
+                                />
+                            </div>
+                        </div>
+
                         <p className="text-xs sm:text-sm text-neutral-400 font-light leading-relaxed max-w-sm">
                             Corretora Autorizada AMEP Saúde na Baixada Fluminense. Transparência, cotações imbatíveis sem coparticipação e suporte humanizado do primeiro contato ao pós-venda.
                         </p>
-                        <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-500 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 w-fit">
-                            <ShieldCheck className="size-4 shrink-0" />
+                        <div className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 w-fit">
+                            <ShieldCheck className="size-4 shrink-0 text-emerald-400" />
                             <span>Registro ANS nº 413330</span>
                         </div>
                     </div>

@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calculator, Users, User, ArrowLeft, ArrowRight, Send, CheckCircle2, ShieldCheck, Sparkles, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -50,7 +51,8 @@ export default function AmepSimulator() {
             else if (faixaEtaria === '34 a 38 anos') valorBase = 197.42;
             else if (faixaEtaria === '39 a 43 anos') valorBase = 221.11;
 
-            return { valorUnitario: valorBase.toFixed(2).replace('.', ','), total: valorBase.toFixed(2).replace('.', ',') };
+            const total = valorBase;
+            return { valorUnitario: valorBase.toFixed(2).replace('.', ','), total: total.toFixed(2).replace('.', ',') };
         }
     };
 
@@ -71,9 +73,12 @@ export default function AmepSimulator() {
                 
                 {/* Header */}
                 <div className="flex flex-col items-center text-center space-y-3 mb-10">
-                    <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
-                        <Calculator className="size-3.5" />
-                        <span>Simulador Instantâneo Amep</span>
+                    <div className="flex items-center gap-2">
+                        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider">
+                            <Calculator className="size-3.5" />
+                            <span>Simulador Instantâneo Amep</span>
+                        </div>
+                        <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={75} height={22} className="h-5 w-auto object-contain" />
                     </div>
 
                     <h2 className="text-2xl sm:text-4xl font-extrabold text-foreground tracking-tight max-w-2xl">
@@ -203,7 +208,7 @@ export default function AmepSimulator() {
                                                 max={99}
                                                 value={qtdVidas}
                                                 onChange={(e) => setQtdVidas(Math.max(2, parseInt(e.target.value) || 2))}
-                                                className="w-full p-3 rounded-xl border border-border/80 bg-muted/30 text-sm font-bold focus:bg-background focus:border-emerald-500 outline-none"
+                                                className="w-full p-3 rounded-xl border border-border/80 bg-background text-foreground text-sm font-bold focus:border-emerald-500 outline-none shadow-2xs"
                                             />
                                         </div>
 
@@ -215,7 +220,7 @@ export default function AmepSimulator() {
                                                 max={65}
                                                 value={mediaIdade}
                                                 onChange={(e) => setMediaIdade(parseInt(e.target.value) || 30)}
-                                                className="w-full p-3 rounded-xl border border-border/80 bg-muted/30 text-sm font-bold focus:bg-background focus:border-emerald-500 outline-none"
+                                                className="w-full p-3 rounded-xl border border-border/80 bg-background text-foreground text-sm font-bold focus:border-emerald-500 outline-none shadow-2xs"
                                             />
                                         </div>
                                     </div>
@@ -225,14 +230,14 @@ export default function AmepSimulator() {
                                         <select
                                             value={faixaEtaria}
                                             onChange={(e) => setFaixaEtaria(e.target.value)}
-                                            className="w-full p-3.5 rounded-xl border border-border/80 bg-muted/30 text-sm font-bold focus:bg-background focus:border-emerald-500 outline-none cursor-pointer"
+                                            className="w-full p-3.5 rounded-xl border border-border/80 bg-background text-foreground text-sm font-bold focus:border-emerald-500 outline-none cursor-pointer shadow-2xs"
                                         >
-                                            <option value="00 a 18 anos">00 a 18 anos - R$ 138,74</option>
-                                            <option value="19 a 23 anos">19 a 23 anos - R$ 145,67</option>
-                                            <option value="24 a 28 anos">24 a 28 anos - R$ 160,24</option>
-                                            <option value="29 a 33 anos">29 a 33 anos - R$ 176,26</option>
-                                            <option value="34 a 38 anos">34 a 38 anos - R$ 197,42</option>
-                                            <option value="39 a 43 anos">39 a 43 anos - R$ 221,11</option>
+                                            <option value="00 a 18 anos" className="bg-background text-foreground dark:bg-slate-900 dark:text-slate-100">00 a 18 anos - R$ 138,74</option>
+                                            <option value="19 a 23 anos" className="bg-background text-foreground dark:bg-slate-900 dark:text-slate-100">19 a 23 anos - R$ 145,67</option>
+                                            <option value="24 a 28 anos" className="bg-background text-foreground dark:bg-slate-900 dark:text-slate-100">24 a 28 anos - R$ 160,24</option>
+                                            <option value="29 a 33 anos" className="bg-background text-foreground dark:bg-slate-900 dark:text-slate-100">29 a 33 anos - R$ 176,26</option>
+                                            <option value="34 a 38 anos" className="bg-background text-foreground dark:bg-slate-900 dark:text-slate-100">34 a 38 anos - R$ 197,42</option>
+                                            <option value="39 a 43 anos" className="bg-background text-foreground dark:bg-slate-900 dark:text-slate-100">39 a 43 anos - R$ 221,11</option>
                                         </select>
                                     </div>
                                 )}
@@ -289,7 +294,7 @@ export default function AmepSimulator() {
                                                 value={nome}
                                                 onChange={(e) => setNome(e.target.value)}
                                                 placeholder="Nome completo"
-                                                className="w-full p-3 rounded-xl border border-border/80 bg-muted/30 text-sm font-medium focus:bg-background focus:border-emerald-500 outline-none"
+                                                className="w-full p-3 rounded-xl border border-border/80 bg-background text-foreground placeholder:text-muted-foreground text-sm font-medium focus:border-emerald-500 outline-none shadow-2xs"
                                             />
                                         </div>
 
@@ -301,7 +306,7 @@ export default function AmepSimulator() {
                                                 value={whatsapp}
                                                 onChange={handlePhoneChange}
                                                 placeholder="(21) 99999-9999"
-                                                className="w-full p-3 rounded-xl border border-border/80 bg-muted/30 text-sm font-medium focus:bg-background focus:border-emerald-500 outline-none"
+                                                className="w-full p-3 rounded-xl border border-border/80 bg-background text-foreground placeholder:text-muted-foreground text-sm font-medium focus:border-emerald-500 outline-none shadow-2xs"
                                             />
                                         </div>
                                     </div>

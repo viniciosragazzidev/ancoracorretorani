@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { ShieldCheck, User, Phone, Building2, Send, Sparkles, Zap, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, User, Phone, Building2, Send, Sparkles, Zap, CheckCircle2, Award, HeartPulse } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function AmepHero() {
@@ -43,36 +44,43 @@ export default function AmepHero() {
     return (
         <section className="relative w-full min-h-[100dvh] pt-24 pb-16 md:pt-32 md:pb-24 flex items-center justify-center bg-background overflow-hidden border-b border-border/40 font-sans select-none">
             {/* Ambient Background Gradient Wash */}
-            <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-emerald-500/10 via-emerald-500/5 to-transparent pointer-events-none -z-10" />
-            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-emerald-500/10 blur-[120px] rounded-full pointer-events-none -z-10" />
+            <div className="absolute top-0 inset-x-0 h-[600px] bg-gradient-to-b from-emerald-500/10 via-teal-500/5 to-transparent pointer-events-none -z-10" />
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-emerald-500/10 blur-[140px] rounded-full pointer-events-none -z-10" />
 
             <div className="w-full max-w-[1320px] mx-auto px-4 sm:px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
                     
-                    {/* Left Column: Value Proposition & Price Anchors (7 Cols) */}
+                    {/* Left Column: Value Proposition & Brand Anchors (7 Cols) */}
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-7 flex flex-col items-start text-left space-y-6"
                     >
-                        {/* Status Microtag */}
-                        <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold tracking-wide">
-                            <span className="relative flex size-2">
-                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
-                                <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
-                            </span>
-                            <span>Campanhas e Tabelas Comerciais Atualizadas</span>
+                        {/* Co-Branding Header Badge */}
+                        <div className="flex flex-wrap items-center gap-3 p-2 pr-4 rounded-full bg-muted/60 border border-border/60 backdrop-blur-md shadow-xs">
+                            <div className="flex items-center gap-2 bg-background px-3 py-1 rounded-full border border-border/40 shadow-2xs">
+                                <Image src="/logo.webp" alt="Âncora Corretora" width={75} height={22} className="h-4 sm:h-5 w-auto object-contain dark:brightness-0 dark:invert" priority />
+                                <span className="text-xs font-bold text-muted-foreground">×</span>
+                                <Image src="/amep_saude_logo.png" alt="Amep Saúde" width={80} height={24} className="h-5 sm:h-6 w-auto object-contain" priority />
+                            </div>
+                            <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                                <span className="relative flex size-2">
+                                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                                    <span className="relative inline-flex size-2 rounded-full bg-emerald-500"></span>
+                                </span>
+                                <span>Tabela Oficial Atualizada</span>
+                            </div>
                         </div>
 
                         {/* Headline */}
                         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-foreground leading-[1.1] max-w-3xl">
-                            O Plano de Saúde que Cabe no Seu Bolso, <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-500">Sem Pegadinhas e Sem Coparticipação</span>.
+                            O Plano de Saúde que Cabe no Seu Bolso, <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-400">Sem Franquia e Sem Coparticipação</span>.
                         </h1>
 
                         {/* Subheadline */}
                         <p className="text-base sm:text-lg text-muted-foreground leading-relaxed max-w-2xl font-normal">
-                            Atendimento de urgência, emergência, consultas e exames na Baixada Fluminense e RJ. Contrate de forma individual ou empresarial a partir de valores imbatíveis.
+                            Atendimento de urgência, emergência, consultas e exames com a força do <strong className="text-foreground font-semibold">Hospital Prontonil em Nova Iguaçu</strong>. Contrate com carência zero para consultas.
                         </p>
 
                         {/* Price Anchor Cards Grid */}
@@ -105,29 +113,40 @@ export default function AmepHero() {
                                     Maior Desconto
                                 </div>
                                 <div>
-                                    <span className="text-xs font-bold text-emerald-700 dark:text-emerald-300 uppercase tracking-wider">Empresarial / MEI (2+ Vidas)</span>
+                                    <span className="text-xs font-bold text-emerald-600 dark:text-emerald-300 uppercase tracking-wider">Empresarial / MEI (2+ Vidas)</span>
                                     <div className="mt-1 flex items-baseline gap-1">
-                                        <span className="text-xs font-medium text-emerald-800 dark:text-emerald-200">a partir de</span>
-                                        <span className="text-2xl sm:text-3xl font-extrabold text-emerald-700 dark:text-emerald-300 tracking-tight">R$ 82<span className="text-lg font-bold">,94</span></span>
-                                        <span className="text-xs text-emerald-800 dark:text-emerald-200">/mês</span>
+                                        <span className="text-xs font-medium text-emerald-600 dark:text-emerald-400">a partir de</span>
+                                        <span className="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-300 tracking-tight">R$ 82<span className="text-lg font-bold">,94</span></span>
+                                        <span className="text-xs text-emerald-600 dark:text-emerald-400">/mês</span>
                                     </div>
                                 </div>
-                                <div className="mt-3 pt-3 border-t border-emerald-500/20 flex items-center gap-1.5 text-xs text-emerald-700 dark:text-emerald-300 font-medium">
+                                <div className="mt-3 pt-3 border-t border-emerald-500/20 flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-medium">
                                     <Zap className="size-3.5 shrink-0 fill-emerald-600" />
                                     <span>Inclua qualquer pessoa sem vínculo</span>
                                 </div>
                             </motion.div>
                         </div>
 
-                        {/* Guarantee Badges */}
-                        <div className="pt-2 flex flex-wrap items-center gap-6 text-xs text-muted-foreground font-medium">
-                            <div className="flex items-center gap-2">
-                                <ShieldCheck className="size-4 text-emerald-500" />
-                                <span>Sem Franquia & Coparticipação</span>
+                        {/* Customer Visual Feature Strip */}
+                        <div className="w-full p-4 rounded-2xl bg-muted/30 border border-border/50 flex flex-col sm:flex-row items-center gap-4">
+                            <div className="flex -space-x-3 shrink-0">
+                                <div className="relative size-11 rounded-full border-2 border-background overflow-hidden shadow-xs">
+                                    <Image src="/image1.png" alt="Cliente Amep Saúde" fill className="object-cover" />
+                                </div>
+                                <div className="relative size-11 rounded-full border-2 border-background overflow-hidden shadow-xs">
+                                    <Image src="/image3.png" alt="Equipe Amep PME" fill className="object-cover" />
+                                </div>
+                                <div className="relative size-11 rounded-full border-2 border-background overflow-hidden shadow-xs">
+                                    <Image src="/image4.png" alt="Atendimento Amep" fill className="object-cover" />
+                                </div>
                             </div>
-                            <div className="flex items-center gap-2">
-                                <Building2 className="size-4 text-emerald-500" />
-                                <span>Rede Própria & Hospital Prontonil</span>
+                            <div className="text-left">
+                                <p className="text-xs font-bold text-foreground">
+                                    Mais de 15.000 vidas atendidas na Baixada Fluminense
+                                </p>
+                                <p className="text-[11px] text-muted-foreground mt-0.5">
+                                    Consultoria especializada e aprovação rápida diretamente na sede em Nova Iguaçu.
+                                </p>
                             </div>
                         </div>
 
@@ -140,21 +159,25 @@ export default function AmepHero() {
                         transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
                         className="lg:col-span-5 w-full max-w-md mx-auto"
                     >
-                        <div className="relative rounded-3xl bg-background/95 dark:bg-background/90 backdrop-blur-2xl border border-border/80 p-6 sm:p-8 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] overflow-hidden">
+                        <div className="relative rounded-3xl bg-background/95 dark:bg-background/95 backdrop-blur-2xl border border-border/80 p-6 sm:p-8 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.15)] overflow-hidden">
                             
                             {/* Top Decorative Border Accent */}
                             <div className="absolute top-0 inset-x-0 h-1.5 bg-gradient-to-r from-emerald-600 via-teal-500 to-emerald-500" />
 
-                            <div className="flex flex-col items-start text-left space-y-2 mb-6">
+                            <div className="flex items-center justify-between gap-2 mb-4">
                                 <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">
                                     <Sparkles className="size-4" />
-                                    <span>Cotação Imediata Amep Saúde</span>
+                                    <span>Cotação Amep Saúde</span>
                                 </div>
+                                <Image src="/amep_saude_logo.png" alt="Amep Saúde Logo" width={75} height={24} className="h-6 w-auto object-contain" />
+                            </div>
+
+                            <div className="flex flex-col items-start text-left space-y-1 mb-6">
                                 <h3 className="text-xl sm:text-2xl font-bold text-foreground tracking-tight">
-                                    Receba a Tabela de Preços Oficial
+                                    Receba a Tabela Oficial
                                 </h3>
                                 <p className="text-xs text-muted-foreground">
-                                    Preencha em 15 segundos para receber o comparativo no seu WhatsApp.
+                                    Preencha em 15 segundos para receber a cotação no seu WhatsApp.
                                 </p>
                             </div>
 
@@ -170,7 +193,7 @@ export default function AmepHero() {
                                             value={nome}
                                             onChange={(e) => setNome(e.target.value)}
                                             placeholder="Ex: Carlos Oliveira"
-                                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border/80 bg-muted/30 text-sm font-medium focus:bg-background focus:border-emerald-500 outline-none transition-all"
+                                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border/80 bg-background text-foreground placeholder:text-muted-foreground text-sm font-medium focus:border-emerald-500 outline-none transition-all shadow-2xs"
                                         />
                                     </div>
                                 </div>
@@ -186,12 +209,12 @@ export default function AmepHero() {
                                             value={whatsapp}
                                             onChange={handlePhoneChange}
                                             placeholder="(21) 99999-9999"
-                                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border/80 bg-muted/30 text-sm font-medium focus:bg-background focus:border-emerald-500 outline-none transition-all"
+                                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border/80 bg-background text-foreground placeholder:text-muted-foreground text-sm font-medium focus:border-emerald-500 outline-none transition-all shadow-2xs"
                                         />
                                     </div>
                                 </div>
 
-                                {/* Tipo de Plano */}
+                                {/* Tipo de Plano (Contraste Perfeito nos Options) */}
                                 <div className="space-y-1.5">
                                     <label className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Modalidade Desejada</label>
                                     <div className="relative">
@@ -199,10 +222,14 @@ export default function AmepHero() {
                                         <select
                                             value={tipo}
                                             onChange={(e) => setTipo(e.target.value)}
-                                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border/80 bg-muted/30 text-sm font-medium focus:bg-background focus:border-emerald-500 outline-none transition-all appearance-none cursor-pointer"
+                                            className="w-full pl-10 pr-4 py-3 rounded-xl border border-border/80 bg-background text-foreground text-sm font-medium focus:border-emerald-500 outline-none transition-all appearance-none cursor-pointer shadow-2xs"
                                         >
-                                            <option value="pme">Empresarial / MEI (a partir de R$ 82,94)</option>
-                                            <option value="individual">Individual / Adesão (a partir de R$ 138,74)</option>
+                                            <option value="pme" className="bg-background text-foreground dark:bg-slate-900 dark:text-slate-100">
+                                                Empresarial / MEI (a partir de R$ 82,94)
+                                            </option>
+                                            <option value="individual" className="bg-background text-foreground dark:bg-slate-900 dark:text-slate-100">
+                                                Individual / Adesão (a partir de R$ 138,74)
+                                            </option>
                                         </select>
                                     </div>
                                 </div>
