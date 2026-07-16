@@ -7,6 +7,8 @@ import { User, Phone, Building2, Send, Sparkles, Zap, CheckCircle2, ShieldCheck,
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
+import { sendLeadToCorreTop } from '@/lib/webhook';
+
 const fadeLeft = {
     hidden: { opacity: 0, x: -30 },
     visible: (delay: number) => ({
@@ -42,17 +44,26 @@ export default function AmepHero() {
         setWhatsapp(formatted);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const cleaned = whatsapp.replace(/\D/g, '');
         if (cleaned.length >= 10 && nome) {
             setIsSubmitting(true);
-            setTimeout(() => {
-                setIsSubmitting(false);
-                const modalidadeText = tipo === 'pme' ? 'CNPJ / MEI (a partir de R$ 82,94)' : 'Individual (a partir de R$ 138,74)';
-                const msg = `Olá! Me chamo ${nome} e gostaria de consultar a tabela de preços do plano Amep Saúde (${modalidadeText}).`;
-                window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
-            }, 600);
+            const modalidadeText = tipo === 'pme' ? 'CNPJ / MEI (a partir de R$ 82,94)' : 'Individual (a partir de R$ 138,74)';
+            try {
+                await sendLeadToCorreTop({
+                    name: nome,
+                    phone: whatsapp,
+                    source: "lp_amep_hero",
+                    planInterest: `Amep Saúde - ${modalidadeText}`,
+                    externalId: "form_amep_hero"
+                });
+            } catch (error) {
+                console.error("Erro ao enviar lead:", error);
+            }
+            setIsSubmitting(false);
+            const msg = `Olá! Me chamo ${nome} e gostaria de consultar a tabela de preços do plano Amep Saúde (${modalidadeText}).`;
+            window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
         }
     };
 

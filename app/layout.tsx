@@ -36,6 +36,14 @@ export default function RootLayout({
       className="h-full scroll-smooth"
     >
       <body className={`${geistSans.variable} ${geistMono.variable} font-sans min-h-full flex flex-col antialiased`}>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.CORRETOP_HUB_URL = "https://corretop.vercel.app/api/webhooks/leads";
+              window.CORRETOP_HUB_TOKEN = "crt_live_pnRAxXlu0V23xaLb4HLjqncDBLX7TxE7q6eaia84vV8";
+            `
+          }}
+        />
         {children}
       </body>
     </html>

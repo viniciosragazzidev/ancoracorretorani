@@ -7,6 +7,8 @@ import { Calculator, User, ArrowLeft, ArrowRight, Send, Building2 } from 'lucide
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
+import { sendLeadToCorreTop } from '@/lib/webhook';
+
 export default function AmepSimulator() {
     const [step, setStep] = useState(1);
 
@@ -57,12 +59,23 @@ export default function AmepSimulator() {
         }
     };
 
-    const handleFinalSubmit = (e: React.FormEvent) => {
+    const handleFinalSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const cleaned = whatsapp.replace(/\D/g, '');
         if (cleaned.length >= 10 && nome) {
             const estimativa = getEstimativa();
             const modStr = modalidade === 'pme' ? `Empresarial/MEI (${qtdVidas} vidas, média ${mediaIdade} anos)` : `Individual (${faixaEtaria})`;
+            try {
+                await sendLeadToCorreTop({
+                    name: nome,
+                    phone: whatsapp,
+                    source: "lp_amep_simulator",
+                    planInterest: `Amep Saúde - ${modStr} - Total Est: R$ ${estimativa.total}`,
+                    externalId: "form_amep_simulator"
+                });
+            } catch (error) {
+                console.error("Erro ao enviar lead:", error);
+            }
             const msg = `Olá! Realizei uma simulação no site da AMEP Saúde:\n- Nome: ${nome}\n- Modalidade: ${modStr}\n- Estimativa Mensal: R$ ${estimativa.total}\nGostaria de finalizar a contratação!`;
             window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
         }

@@ -6,6 +6,8 @@ import { ShieldCheck, UserPlus, Trash2, ArrowLeft, Loader2, CheckCircle2, Buildi
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
+import { sendLeadToCorreTop } from '@/lib/webhook';
+
 interface Props {}
 
 interface Dependant {
@@ -115,23 +117,34 @@ const SectionFive: React.FC<Props> = () => {
         nextStep();
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!nome || whatsapp.length < 14) return;
 
         setIsSubmitting(true);
-        // Simulate data post & WhatsApp format
-        setTimeout(() => {
-            setIsSubmitting(false);
-            setIsSuccess(true);
-            
-            const detailText = contratacao === 'corporate'
-                ? `Empresa (CNPJ/MEI) - ${qtdColaboradores} colaboradores, média de idade: ${mediaIdade} anos`
-                : `Individual/Família - Titular: ${idadeTitular} anos${dependants.length > 0 ? `, Dependentes: ${dependants.map(d => d.age).join(', ')} anos` : ''}`;
 
-            const msg = `Olá! Me chamo ${nome}. Gostaria de receber a cotação do plano ${categoria?.toUpperCase()}.\nPerfil: ${detailText}`;
-            window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
-        }, 1500);
+        const detailText = contratacao === 'corporate'
+            ? `Empresa (CNPJ/MEI) - ${qtdColaboradores} colaboradores, média de idade: ${mediaIdade} anos`
+            : `Individual/Família - Titular: ${idadeTitular} anos${dependants.length > 0 ? `, Dependentes: ${dependants.map(d => d.age).join(', ')} anos` : ''}`;
+
+        try {
+            const planText = `Plano ${categoria ? categoria.toUpperCase() : 'Saúde/Odonto'} (${contratacao === 'corporate' ? 'PME' : 'Individual'}) - Perfil: ${detailText}`;
+            await sendLeadToCorreTop({
+                name: nome,
+                phone: whatsapp,
+                source: "lp_secao5_calculadora",
+                planInterest: planText.substring(0, 160),
+                externalId: "form_secao5_calculadora"
+            });
+        } catch (error) {
+            console.error("Erro ao enviar lead:", error);
+        }
+
+        setIsSubmitting(false);
+        setIsSuccess(true);
+
+        const msg = `Olá! Me chamo ${nome}. Gostaria de receber a cotação do plano ${categoria?.toUpperCase()}.\nPerfil: ${detailText}`;
+        window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
     return (

@@ -6,6 +6,8 @@ import { Building2, User, Phone, ShieldCheck, Stethoscope, Sparkles } from 'luci
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
+import { sendLeadToCorreTop } from '@/lib/webhook';
+
 const fadeLeft = {
     hidden: { opacity: 0, x: -40 },
     visible: (delay: number) => ({
@@ -53,15 +55,24 @@ const Hero: React.FC = () => {
         setWhatsapp(formatted);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const cleaned = whatsapp.replace(/\D/g, '');
         if (cleaned.length >= 10 && nome) {
             setIsSubmitting(true);
-            setTimeout(() => {
-                setIsSubmitting(false);
-                window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(`Olá! Me chamo ${nome} e gostaria de uma cotação rápida via ${tipo.toUpperCase()}.`)}`, '_blank');
-            }, 600);
+            try {
+                await sendLeadToCorreTop({
+                    name: nome,
+                    phone: whatsapp,
+                    source: "lp_hero_principal",
+                    planInterest: tipo === 'cnpj' ? "Plano de Saúde PME/CNPJ" : "Plano de Saúde Individual",
+                    externalId: "form_hero_principal"
+                });
+            } catch (error) {
+                console.error("Erro ao enviar lead:", error);
+            }
+            setIsSubmitting(false);
+            window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(`Olá! Me chamo ${nome} e gostaria de uma cotação rápida via ${tipo.toUpperCase()}.`)}`, '_blank');
         }
     };
 

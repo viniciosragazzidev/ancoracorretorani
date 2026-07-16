@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, User, Phone, Building2, ShieldCheck, Send, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
+import { sendLeadToCorreTop } from '@/lib/webhook';
+
 const vanessaMessages = [
     "Vanessa está online e tem um desconto exclusivo pra você!",
     "Vanessa liberou tabela PME com 35% de desconto!",
@@ -45,17 +47,26 @@ const FloatingChat: React.FC = () => {
         setWhatsapp(formatted);
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const cleaned = whatsapp.replace(/\D/g, '');
         if (cleaned.length >= 10 && nome) {
             setIsSubmitting(true);
-            setTimeout(() => {
-                setIsSubmitting(false);
-                setIsOpen(false);
-                const msg = `Olá Vanessa! Me chamo ${nome} e gostaria de aproveitar o desconto exclusivo via ${tipo.toUpperCase()}.`;
-                window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
-            }, 600);
+            try {
+                await sendLeadToCorreTop({
+                    name: nome,
+                    phone: whatsapp,
+                    source: "lp_chat_flutuante",
+                    planInterest: tipo === 'cnpj' ? "Plano de Saúde PME/CNPJ (Desconto Vanessa)" : "Plano de Saúde Individual (Desconto Vanessa)",
+                    externalId: "form_chat_flutuante"
+                });
+            } catch (error) {
+                console.error("Erro ao enviar lead:", error);
+            }
+            setIsSubmitting(false);
+            setIsOpen(false);
+            const msg = `Olá Vanessa! Me chamo ${nome} e gostaria de aproveitar o desconto exclusivo via ${tipo.toUpperCase()}.`;
+            window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
         }
     };
 
