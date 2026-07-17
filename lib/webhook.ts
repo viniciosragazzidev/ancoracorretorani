@@ -57,6 +57,7 @@ export async function sendLeadToCorreTop(payload: CorreTopLeadPayload) {
 
     const result = await response.json().catch(() => ({}));
     if (response.ok && (result.success || response.status === 200 || response.status === 201)) {
+      console.log("sendLeadToCorreTop: Lead enviado com sucesso para o CorreTop!", { name: strictPayload.name, phone: strictPayload.phone, result });
       return { success: true, data: result };
     } else {
       console.error("sendLeadToCorreTop: Error from webhook:", result);
