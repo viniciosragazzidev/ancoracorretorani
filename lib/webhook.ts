@@ -13,7 +13,7 @@ export async function sendLeadToCorreTop(payload: CorreTopLeadPayload) {
   const hubUrl = (typeof window !== 'undefined' && (window as any).CORRETOP_HUB_URL) 
     || "https://corretop.vercel.app/api/webhooks/leads";
   const hubToken = (typeof window !== 'undefined' && (window as any).CORRETOP_HUB_TOKEN)
-    || "crt_live_PCIpgmgdjDhwVn6-Ylt8rK84klwYK9C7-4_uwPdb2KQ";
+    || "crt_live_AhuEg4vI1wdKeBZx2Wj77tSK-NZOIMdaD_fLU-qajNc";
 
   // Clean phone number: Keep only digits, must be at least 10 digits
   const cleanedPhone = payload.phone.replace(/\D/g, '');
