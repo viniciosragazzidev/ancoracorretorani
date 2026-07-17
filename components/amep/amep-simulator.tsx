@@ -76,16 +76,14 @@ export default function AmepSimulator() {
                     externalId: "form_amep_simulator"
                 });
                 if (response?.success) {
-                    toast.success("Simulação enviada com sucesso! Abrindo o WhatsApp...", { id: toastId });
+                    toast.success("Simulação recebida com sucesso! Em breve nossa equipe entrará em contato.", { id: toastId });
                 } else {
-                    toast.warning("Simulação processada! Redirecionando para o WhatsApp...", { id: toastId });
+                    toast.warning("Sua simulação foi processada. Entraremos em contato em breve.", { id: toastId });
                 }
             } catch (error) {
                 console.error("Erro ao enviar lead:", error);
-                toast.error("Ocorreu um erro no envio. Abrindo o WhatsApp...", { id: toastId });
+                toast.error("Ocorreu um erro no envio. Por favor, tente novamente.", { id: toastId });
             }
-            const msg = `Olá! Realizei uma simulação no site da AMEP Saúde:\n- Nome: ${nome}\n- Modalidade: ${modStr}\n- Estimativa Mensal: R$ ${estimativa.total}\nGostaria de finalizar a contratação!`;
-            window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
         }
     };
 

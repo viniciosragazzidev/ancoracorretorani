@@ -61,17 +61,15 @@ export default function AmepHero() {
                     externalId: "form_amep_hero"
                 });
                 if (response?.success) {
-                    toast.success("Cotação enviada com sucesso! Abrindo o WhatsApp...", { id: toastId });
+                    toast.success("Solicitação recebida com sucesso! Em breve nossa equipe entrará em contato.", { id: toastId });
                 } else {
-                    toast.warning("Cotação processada! Redirecionando para o WhatsApp...", { id: toastId });
+                    toast.warning("Sua solicitação foi processada. Entraremos em contato em breve.", { id: toastId });
                 }
             } catch (error) {
                 console.error("Erro ao enviar lead:", error);
-                toast.error("Ocorreu um erro no envio. Abrindo o WhatsApp...", { id: toastId });
+                toast.error("Ocorreu um erro no envio. Por favor, tente novamente.", { id: toastId });
             }
             setIsSubmitting(false);
-            const msg = `Olá! Me chamo ${nome} e gostaria de consultar a tabela de preços do plano Amep Saúde (${modalidadeText}).`;
-            window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
         }
     };
 

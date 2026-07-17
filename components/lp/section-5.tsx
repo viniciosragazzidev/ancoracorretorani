@@ -139,20 +139,17 @@ const SectionFive: React.FC<Props> = () => {
                 externalId: "form_secao5_calculadora"
             });
             if (response?.success) {
-                toast.success("Solicitação enviada com sucesso! Abrindo o WhatsApp...", { id: toastId });
+                toast.success("Solicitação recebida com sucesso! Em breve nossa equipe entrará em contato.", { id: toastId });
             } else {
-                toast.warning("Solicitação processada! Redirecionando para o WhatsApp...", { id: toastId });
+                toast.warning("Sua solicitação foi recebida. Entraremos em contato em breve.", { id: toastId });
             }
         } catch (error) {
             console.error("Erro ao enviar lead:", error);
-            toast.error("Ocorreu um erro no envio. Abrindo o WhatsApp...", { id: toastId });
+            toast.error("Ocorreu um erro no envio. Por favor, tente novamente.", { id: toastId });
         }
 
         setIsSubmitting(false);
         setIsSuccess(true);
-
-        const msg = `Olá! Me chamo ${nome}. Gostaria de receber a cotação do plano ${categoria?.toUpperCase()}.\nPerfil: ${detailText}`;
-        window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');
     };
 
     return (

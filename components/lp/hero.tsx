@@ -61,7 +61,7 @@ const Hero: React.FC = () => {
         const cleaned = whatsapp.replace(/\D/g, '');
         if (cleaned.length >= 10 && nome) {
             setIsSubmitting(true);
-            const toastId = toast.loading("Enviando sua simulação...");
+            const toastId = toast.loading("Enviando sua solicitação...");
             try {
                 const response = await sendLeadToCorreTop({
                     name: nome,
@@ -71,16 +71,15 @@ const Hero: React.FC = () => {
                     externalId: "form_hero_principal"
                 });
                 if (response?.success) {
-                    toast.success("Cotação enviada com sucesso! Abrindo o WhatsApp...", { id: toastId });
+                    toast.success("Solicitação recebida com sucesso! Em breve nossa equipe entrará em contato.", { id: toastId });
                 } else {
-                    toast.warning("Cotação processada! Redirecionando para o WhatsApp...", { id: toastId });
+                    toast.warning("Sua solicitação foi processada. Entraremos em contato em breve.", { id: toastId });
                 }
             } catch (error) {
                 console.error("Erro ao enviar lead:", error);
-                toast.error("Ocorreu um erro no envio. Abrindo o WhatsApp...", { id: toastId });
+                toast.error("Ocorreu um erro no envio. Por favor, tente novamente.", { id: toastId });
             }
             setIsSubmitting(false);
-            window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(`Olá! Me chamo ${nome} e gostaria de uma cotação rápida via ${tipo.toUpperCase()}.`)}`, '_blank');
         }
     };
 
