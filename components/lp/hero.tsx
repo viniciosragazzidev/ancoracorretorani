@@ -6,6 +6,7 @@ import { Building2, User, Phone, ShieldCheck, Stethoscope, Sparkles } from 'luci
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
+import { toast } from "sonner";
 import { sendLeadToCorreTop } from '@/lib/webhook';
 
 const fadeLeft = {
@@ -60,16 +61,23 @@ const Hero: React.FC = () => {
         const cleaned = whatsapp.replace(/\D/g, '');
         if (cleaned.length >= 10 && nome) {
             setIsSubmitting(true);
+            const toastId = toast.loading("Enviando sua simulação...");
             try {
-                await sendLeadToCorreTop({
+                const response = await sendLeadToCorreTop({
                     name: nome,
                     phone: whatsapp,
                     source: "lp_hero_principal",
                     planInterest: tipo === 'cnpj' ? "Plano de Saúde PME/CNPJ" : "Plano de Saúde Individual",
                     externalId: "form_hero_principal"
                 });
+                if (response?.success) {
+                    toast.success("Cotação enviada com sucesso! Abrindo o WhatsApp...", { id: toastId });
+                } else {
+                    toast.warning("Cotação processada! Redirecionando para o WhatsApp...", { id: toastId });
+                }
             } catch (error) {
                 console.error("Erro ao enviar lead:", error);
+                toast.error("Ocorreu um erro no envio. Abrindo o WhatsApp...", { id: toastId });
             }
             setIsSubmitting(false);
             window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(`Olá! Me chamo ${nome} e gostaria de uma cotação rápida via ${tipo.toUpperCase()}.`)}`, '_blank');

@@ -7,6 +7,7 @@ import { User, Phone, Building2, Send, Sparkles, Zap, CheckCircle2, ShieldCheck,
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
+import { toast } from "sonner";
 import { sendLeadToCorreTop } from '@/lib/webhook';
 
 const fadeLeft = {
@@ -49,17 +50,24 @@ export default function AmepHero() {
         const cleaned = whatsapp.replace(/\D/g, '');
         if (cleaned.length >= 10 && nome) {
             setIsSubmitting(true);
+            const toastId = toast.loading("Enviando sua solicitação...");
             const modalidadeText = tipo === 'pme' ? 'CNPJ / MEI (a partir de R$ 82,94)' : 'Individual (a partir de R$ 138,74)';
             try {
-                await sendLeadToCorreTop({
+                const response = await sendLeadToCorreTop({
                     name: nome,
                     phone: whatsapp,
                     source: "lp_amep_hero",
                     planInterest: `Amep Saúde - ${modalidadeText}`,
                     externalId: "form_amep_hero"
                 });
+                if (response?.success) {
+                    toast.success("Cotação enviada com sucesso! Abrindo o WhatsApp...", { id: toastId });
+                } else {
+                    toast.warning("Cotação processada! Redirecionando para o WhatsApp...", { id: toastId });
+                }
             } catch (error) {
                 console.error("Erro ao enviar lead:", error);
+                toast.error("Ocorreu um erro no envio. Abrindo o WhatsApp...", { id: toastId });
             }
             setIsSubmitting(false);
             const msg = `Olá! Me chamo ${nome} e gostaria de consultar a tabela de preços do plano Amep Saúde (${modalidadeText}).`;

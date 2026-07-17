@@ -7,6 +7,7 @@ import { Calculator, User, ArrowLeft, ArrowRight, Send, Building2 } from 'lucide
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
+import { toast } from 'sonner';
 import { sendLeadToCorreTop } from '@/lib/webhook';
 
 export default function AmepSimulator() {
@@ -65,16 +66,23 @@ export default function AmepSimulator() {
         if (cleaned.length >= 10 && nome) {
             const estimativa = getEstimativa();
             const modStr = modalidade === 'pme' ? `Empresarial/MEI (${qtdVidas} vidas, média ${mediaIdade} anos)` : `Individual (${faixaEtaria})`;
+            const toastId = toast.loading("Enviando sua simulação...");
             try {
-                await sendLeadToCorreTop({
+                const response = await sendLeadToCorreTop({
                     name: nome,
                     phone: whatsapp,
                     source: "lp_amep_simulator",
                     planInterest: `Amep Saúde - ${modStr} - Total Est: R$ ${estimativa.total}`,
                     externalId: "form_amep_simulator"
                 });
+                if (response?.success) {
+                    toast.success("Simulação enviada com sucesso! Abrindo o WhatsApp...", { id: toastId });
+                } else {
+                    toast.warning("Simulação processada! Redirecionando para o WhatsApp...", { id: toastId });
+                }
             } catch (error) {
                 console.error("Erro ao enviar lead:", error);
+                toast.error("Ocorreu um erro no envio. Abrindo o WhatsApp...", { id: toastId });
             }
             const msg = `Olá! Realizei uma simulação no site da AMEP Saúde:\n- Nome: ${nome}\n- Modalidade: ${modStr}\n- Estimativa Mensal: R$ ${estimativa.total}\nGostaria de finalizar a contratação!`;
             window.open(`https://wa.me/5521974450263?text=${encodeURIComponent(msg)}`, '_blank');

@@ -6,6 +6,7 @@ import { ShieldCheck, UserPlus, Trash2, ArrowLeft, Loader2, CheckCircle2, Buildi
 import { Button } from '@/components/ui/button';
 import SplitText from '@/components/split-text';
 
+import { toast } from 'sonner';
 import { sendLeadToCorreTop } from '@/lib/webhook';
 
 interface Props {}
@@ -122,6 +123,7 @@ const SectionFive: React.FC<Props> = () => {
         if (!nome || whatsapp.length < 14) return;
 
         setIsSubmitting(true);
+        const toastId = toast.loading("Enviando sua solicitação...");
 
         const detailText = contratacao === 'corporate'
             ? `Empresa (CNPJ/MEI) - ${qtdColaboradores} colaboradores, média de idade: ${mediaIdade} anos`
@@ -129,15 +131,21 @@ const SectionFive: React.FC<Props> = () => {
 
         try {
             const planText = `Plano ${categoria ? categoria.toUpperCase() : 'Saúde/Odonto'} (${contratacao === 'corporate' ? 'PME' : 'Individual'}) - Perfil: ${detailText}`;
-            await sendLeadToCorreTop({
+            const response = await sendLeadToCorreTop({
                 name: nome,
                 phone: whatsapp,
                 source: "lp_secao5_calculadora",
                 planInterest: planText.substring(0, 160),
                 externalId: "form_secao5_calculadora"
             });
+            if (response?.success) {
+                toast.success("Solicitação enviada com sucesso! Abrindo o WhatsApp...", { id: toastId });
+            } else {
+                toast.warning("Solicitação processada! Redirecionando para o WhatsApp...", { id: toastId });
+            }
         } catch (error) {
             console.error("Erro ao enviar lead:", error);
+            toast.error("Ocorreu um erro no envio. Abrindo o WhatsApp...", { id: toastId });
         }
 
         setIsSubmitting(false);

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, X, User, Phone, Building2, ShieldCheck, Send, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { toast } from "sonner";
 
 import { sendLeadToCorreTop } from '@/lib/webhook';
 
@@ -52,16 +53,23 @@ const FloatingChat: React.FC = () => {
         const cleaned = whatsapp.replace(/\D/g, '');
         if (cleaned.length >= 10 && nome) {
             setIsSubmitting(true);
+            const toastId = toast.loading("Enviando sua simulação...");
             try {
-                await sendLeadToCorreTop({
+                const response = await sendLeadToCorreTop({
                     name: nome,
                     phone: whatsapp,
                     source: "lp_chat_flutuante",
                     planInterest: tipo === 'cnpj' ? "Plano de Saúde PME/CNPJ (Desconto Vanessa)" : "Plano de Saúde Individual (Desconto Vanessa)",
                     externalId: "form_chat_flutuante"
                 });
+                if (response?.success) {
+                    toast.success("Cotação enviada com sucesso! Abrindo o WhatsApp...", { id: toastId });
+                } else {
+                    toast.warning("Cotação processada! Redirecionando para o WhatsApp...", { id: toastId });
+                }
             } catch (error) {
                 console.error("Erro ao enviar lead:", error);
+                toast.error("Ocorreu um erro no envio. Abrindo o WhatsApp...", { id: toastId });
             }
             setIsSubmitting(false);
             setIsOpen(false);

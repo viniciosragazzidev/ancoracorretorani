@@ -25,6 +25,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { Toaster } from "@/components/ui/sonner";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,11 +42,12 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               window.CORRETOP_HUB_URL = "https://corretop.vercel.app/api/webhooks/leads";
-              window.CORRETOP_HUB_TOKEN = "crt_live_pnRAxXlu0V23xaLb4HLjqncDBLX7TxE7q6eaia84vV8";
+              window.CORRETOP_HUB_TOKEN = "crt_live_zxMq7m_1nfIDGgIEQ3kbp0dKnUHo7lTqO8E-8MMC0V8";
             `
           }}
         />
         {children}
+        <Toaster richColors closeButton position="top-center" />
       </body>
     </html>
   );
