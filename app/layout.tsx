@@ -42,7 +42,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{
             __html: `
               window.CORRETOP_HUB_URL = "https://corretop.vercel.app/api/webhooks/leads";
-              window.CORRETOP_HUB_TOKEN = "crt_live_zxMq7m_1nfIDGgIEQ3kbp0dKnUHo7lTqO8E-8MMC0V8";
+              window.CORRETOP_HUB_TOKEN = "crt_live_PCIpgmgdjDhwVn6-Ylt8rK84klwYK9C7-4_uwPdb2KQ";
             `
           }}
         />

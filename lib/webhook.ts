@@ -13,13 +13,13 @@ export async function sendLeadToCorreTop(payload: CorreTopLeadPayload) {
   const hubUrl = (typeof window !== 'undefined' && (window as any).CORRETOP_HUB_URL) 
     || "https://corretop.vercel.app/api/webhooks/leads";
   const hubToken = (typeof window !== 'undefined' && (window as any).CORRETOP_HUB_TOKEN)
-    || "crt_live_zxMq7m_1nfIDGgIEQ3kbp0dKnUHo7lTqO8E-8MMC0V8";
+    || "crt_live_PCIpgmgdjDhwVn6-Ylt8rK84klwYK9C7-4_uwPdb2KQ";
 
   // Clean phone number: Keep only digits, must be at least 10 digits
   const cleanedPhone = payload.phone.replace(/\D/g, '');
 
   // Strict payload building (no extra properties to avoid 422 Invalid Payload)
-  const strictPayload: Record<string, string> = {
+  const strictPayload: Record<string, any> = {
     name: payload.name.trim(),
     phone: cleanedPhone,
     source: payload.source.trim(),
@@ -49,7 +49,8 @@ export async function sendLeadToCorreTop(payload: CorreTopLeadPayload) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": `Bearer ${hubToken}`
+        "Authorization": `Bearer ${hubToken}`,
+        "Idempotency-Key": `lead-${Date.now()}`
       },
       body: JSON.stringify(strictPayload)
     });
